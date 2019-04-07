@@ -1,0 +1,276 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "AWS VPC-VPC Peering",
+    "Parameters": {
+
+        "VPCName1": {
+            "Description": "Enter VPC Name as per Region - VPC - 1",
+            "Type": "String",
+            "Default": "Custom_VPC_"
+        },
+        "CIDRBlockVPC1": {
+            "Description": "Enter CIDR Block - VPc - 1",
+            "Type": "String",
+            "Default": "10.0.1.0/24"
+        },
+        "SubnetAZVPC1": {
+            "Description": "AZ of the subnet - VPc - 1",
+            "Type": "AWS::EC2::AvailabilityZone::Name"
+        },
+        "PubSubnetRange1": {
+            "Description": "Enter Public Subnet Range - VPc - 1",
+            "Type": "String",
+            "Default": "10.0.1.0/26"
+        },
+        "PriSubnetRange1": {
+            "Description": "Enter Private Subnet Range - VPc - 1",
+            "Type": "String",
+            "Default": "10.0.1.128/26"
+        },
+
+        "VPCName2": {
+            "Description": "Enter VPC Name as per Region - VPC - 2",
+            "Type": "String",
+            "Default": "Custom_VPC_"
+        },
+        "CIDRBlockVPC2": {
+            "Description": "Enter CIDR Block - VPc - 2",
+            "Type": "String",
+            "Default": "10.0.2.0/24"
+        },
+        "SubnetAZVPC2": {
+            "Description": "AZ of the subnet - VPc - 2",
+            "Type": "AWS::EC2::AvailabilityZone::Name"
+        },
+        "PubSubnetRange2": {
+            "Description": "Enter Public Subnet Range - VPc - 2",
+            "Type": "String",
+            "Default": "10.0.2.0/26"
+        },
+        "PriSubnetRange2": {
+            "Description": "Enter Private Subnet Range - VPc - 2",
+            "Type": "String",
+            "Default": "10.0.2.128/26"
+        },
+
+        "PublicIPDestinaton": {
+            "Description": "Enter Public IP Destination Address",
+            "Type": "String",
+            "Default": "0.0.0.0/0"
+        },
+
+        "PeerVPCIDNVG": {
+            "Description": "Enter Peer VPC ID - VPc - 1",
+            "Type": "String",
+            "Default": "vpc-0ba8ce01b7e5e2a17"
+        }
+    },
+
+    "Resources": {
+        "CustomVPC1": {
+          "Type": "AWS::EC2::VPC",
+          "Properties": {
+            "CidrBlock": { "Ref": "CIDRBlockVPC1" },
+            "Tags": [{ "Key": "Name", "Value":  { "Ref": "VPCName1" } }]
+          }
+        },
+        "PublicSubnetVPC1": {
+          "Type": "AWS::EC2::Subnet",
+          "Properties": {
+            "VpcId": { "Ref": "CustomVPC1" },
+            "CidrBlock": { "Ref": "PubSubnetRange1" },
+            "AvailabilityZone" : { "Ref": "SubnetAZVPC1" },
+            "Tags": [{ "Key": "Name", "Value":  "Custom_VPC_1_Public_Subnet" }]
+          }
+        },
+        "PrivateSubnetVPC1": {
+          "Type": "AWS::EC2::Subnet",
+          "Properties": {
+            "VpcId": { "Ref": "CustomVPC1" },
+            "CidrBlock": { "Ref": "PriSubnetRange1" },
+            "AvailabilityZone" : { "Ref": "SubnetAZVPC1" },
+            "Tags": [{ "Key": "Name", "Value":  "Custom_VPC_1_Private_Subnet" }]
+          }
+        },
+        "PubRTVPC1": {
+          "Type": "AWS::EC2::RouteTable",
+          "Properties": {
+            "VpcId": { "Ref": "CustomVPC1" },
+            "Tags": [{ "Key": "Name", "Value":  "Custom_VPC_1_Public_RT" }]
+          }
+        },
+        "PriRTVPC1": {
+          "Type": "AWS::EC2::RouteTable",
+          "Properties": {
+            "VpcId": { "Ref": "CustomVPC1" },
+            "Tags": [{ "Key": "Name", "Value":  "Custom_VPC_1_Private_RT" }]
+          }
+        },
+        "CustomVPC1IGW": {
+          "Type": "AWS::EC2::InternetGateway",
+          "Properties": {
+            "Tags": [{ "Key": "Name", "Value":  "Custom_VPC_1_IGW" }]
+          }
+        },
+        "AttachGatewayVPC1": {
+          "Type": "AWS::EC2::VPCGatewayAttachment",
+          "Properties": {
+            "VpcId": { "Ref": "CustomVPC1" },
+            "InternetGatewayId": { "Ref": "CustomVPC1IGW" }
+          }
+        },
+        "PublicRTPathVPC1": {
+          "Type": "AWS::EC2::Route",
+          "Properties": {
+            "RouteTableId": { "Ref": "PubRTVPC1" },
+            "DestinationCidrBlock": { "Ref": "PublicIPDestinaton" },
+            "GatewayId": { "Ref": "CustomVPC1IGW" }
+          }
+        },
+        "PublicRTAssociationVPC1": {
+          "Type": "AWS::EC2::SubnetRouteTableAssociation",
+          "Properties": {
+            "SubnetId": { "Ref": "PublicSubnetVPC1" },
+            "RouteTableId": { "Ref": "PubRTVPC1" }
+          }
+        },
+        "CustomVPC1EIP": {
+          "Type": "AWS::EC2::EIP",
+          "Properties": {
+            "Domain": "vpc"
+          }
+        },
+        "CustomVPC1NAT":{
+          "Type" : "AWS::EC2::NatGateway",
+          "Properties" : {
+            "AllocationId" : { "Fn::GetAtt" : [ "CustomVPC1EIP", "AllocationId" ]},
+            "SubnetId" : { "Ref": "PublicSubnetVPC1" },
+            "Tags" : [ { "Key": "Name", "Value":  "Custom_VPC_NAT_GWY" }]
+          }
+        },
+        "PrivateRTAssociationVPC1": {
+          "Type": "AWS::EC2::SubnetRouteTableAssociation",
+          "Properties": {
+            "SubnetId": { "Ref": "PrivateSubnetVPC1" },
+            "RouteTableId": { "Ref": "PriRTVPC1" }
+          }
+        },
+
+
+
+
+
+          "CustomVPC2": {
+            "Type": "AWS::EC2::VPC",
+            "Properties": {
+              "CidrBlock": { "Ref": "CIDRBlockVPC2" },
+              "Tags": [{ "Key": "Name", "Value":  { "Ref": "VPCName2" } }]
+            }
+          },
+          "PublicSubnetVPC2": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+              "VpcId": { "Ref": "CustomVPC2" },
+              "CidrBlock": { "Ref": "PubSubnetRange2" },
+              "AvailabilityZone" : { "Ref": "SubnetAZVPC2" },
+              "Tags": [{ "Key": "Name", "Value":  "Custom_VPC_2_Public_Subnet" }]
+            }
+          },
+          "PrivateSubnetVPC2": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+              "VpcId": { "Ref": "CustomVPC2" },
+              "CidrBlock": { "Ref": "PriSubnetRange2" },
+              "AvailabilityZone" : { "Ref": "SubnetAZVPC2" },
+              "Tags": [{ "Key": "Name", "Value":  "Custom_VPC_2_Private_Subnet" }]
+            }
+          },
+          "PubRTVPC2": {
+            "Type": "AWS::EC2::RouteTable",
+            "Properties": {
+              "VpcId": { "Ref": "CustomVPC2" },
+              "Tags": [{ "Key": "Name", "Value":  "Custom_VPC_2_Public_RT" }]
+            }
+          },
+          "PriRTVPC2": {
+            "Type": "AWS::EC2::RouteTable",
+            "Properties": {
+              "VpcId": { "Ref": "CustomVPC2" },
+              "Tags": [{ "Key": "Name", "Value":  "Custom_VPC_2_Private_RT" }]
+            }
+          },
+          "CustomVPC2IGW": {
+            "Type": "AWS::EC2::InternetGateway",
+            "Properties": {
+              "Tags": [{ "Key": "Name", "Value":  "Custom_VPC_2_IGW" }]
+            }
+          },
+          "AttachGatewayVPC2": {
+            "Type": "AWS::EC2::VPCGatewayAttachment",
+            "Properties": {
+              "VpcId": { "Ref": "CustomVPC2" },
+              "InternetGatewayId": { "Ref": "CustomVPC2IGW" }
+            }
+          },
+          "PublicRTPathVPC2": {
+            "Type": "AWS::EC2::Route",
+            "Properties": {
+              "RouteTableId": { "Ref": "PubRTVPC2" },
+              "DestinationCidrBlock": { "Ref": "PublicIPDestinaton" },
+              "GatewayId": { "Ref": "CustomVPC2IGW" }
+            }
+          },
+          "PublicRTAssociationVPC2": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+              "SubnetId": { "Ref": "PublicSubnetVPC2" },
+              "RouteTableId": { "Ref": "PubRTVPC2" }
+            }
+          },
+          "CustomVPC2EIP": {
+            "Type": "AWS::EC2::EIP",
+            "Properties": {
+              "Domain": "vpc"
+            }
+          },
+          "CustomVPC2NAT":{
+            "Type" : "AWS::EC2::NatGateway",
+            "Properties" : {
+              "AllocationId" : { "Fn::GetAtt" : [ "CustomVPC2EIP", "AllocationId" ]},
+              "SubnetId" : { "Ref": "PublicSubnetVPC2" },
+              "Tags" : [ { "Key": "Name", "Value":  "Custom_VPC_2_NAT_GWY" }]
+            }
+          },
+          "PrivateRTAssociationVPC2": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+              "SubnetId": { "Ref": "PrivateSubnetVPC2" },
+              "RouteTableId": { "Ref": "PriRTVPC2" }
+            }
+          },
+          "PrivateSubnetPathVPC2": {
+            "Type": "AWS::EC2::Route",
+            "Properties": {
+              "RouteTableId": { "Ref": "PriRTVPC2" },
+              "DestinationCidrBlock": "0.0.0.0/0",
+              "GatewayId": { "Ref": "CustomVPC2NAT" }
+            }
+          },
+          "PrivateSubnetPathVPC1": {
+            "Type": "AWS::EC2::Route",
+            "Properties": {
+              "RouteTableId": { "Ref": "PriRTVPC1" },
+              "DestinationCidrBlock": "0.0.0.0/0",
+              "GatewayId": { "Ref": "CustomVPC1NAT" }
+          }
+        },
+          "PeeringConnection":{
+            "Type" : "AWS::EC2::VPCPeeringConnection",
+            "Properties" : {
+              "PeerVpcId" : { "Ref": "CustomVPC1" },
+              "Tags" : [ { "Key": "Name", "Value":  "VPC_Peering_Connection" } ],
+              "VpcId" : { "Ref": "CustomVPC2" }
+              }
+          }
+      }
+}
