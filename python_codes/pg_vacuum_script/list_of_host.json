@@ -1,0 +1,10 @@
+{
+"postgres.clsd7wqaeoew.ap-south-1.rds.amazonaws.com" : {
+	"database"	: "postgres",
+	"username"	: "postgres",
+	"password"	: "postgres",
+	"job"		: "REINDEX",
+	"schema"	: "public",
+	"table"		: "None"
+	}
+}
