@@ -3,10 +3,9 @@
 '''
 # Job Description:
 	Clone the repo with input details
-	Set crontab to run on every weekend
+	Set crontab to run on every weekend for Vacuum
 	Sending Mail notification
 
-# Job Description:
 # Step 1 : Importing require modules
 	module os				: to pass arguments from environment
 	module sys				: to pass arguments from command line
@@ -18,16 +17,19 @@
 	module email.mime.text			:
 	module datetime				: to use time calculation on the script
 
-# Step 2 : Defining Help/Usage for the script
+# Step 2 : Defining Classes emailCommunication and vacuumFullReindex
 
-# Step 3 : Define a class "vacuumFullReindex" with functions
-	func __init__				: contructor will connect to the database by default
-	func get_tables_query			: to define a query varies from whole (DB | schemas | table)
-	func get_table				: using above query will yield table one-by-one
-	func get_vaccum_query			: define a query according to our job (vacuum | vacuum full | reindex)
-	func executer				: execute the above job [the output will be saved to "self.conn.notices" list] 
-	func html_data_conversion		: converting nested list into HTML Data
-	func sending_email_notification		: sending HTML data in mail
+# Step 3 : Class "vacuumFullReindex" with Methods
+	Method sending_email_notification	: Will send the mail notofication
+	
+# Step 4 : Class "vacuumFullReindex" with Methods
+	Method __init__				: contructor will connect to the database by default
+	Method get_tables_query			: to define a query varies from whole (DB | schemas | table)
+	Method get_table			: using above query will yield table one-by-one
+	Method get_vaccum_query			: define a query according to our job (vacuum | vacuum full | reindex)
+	Method executer				: execute the above job [the output will be saved to "self.conn.notices" list] 
+	Method html_data_conversion		: converting nested list into HTML Data
+	Method sending_email_notification	: sending HTML data in mail
 '''
 
 import os
@@ -219,9 +221,9 @@ if __name__ == '__main__':
 	user		= args.user
 	password	= args.password
 	job		= args.job
-	schema		= None if args.schema is "None" else args.schema
-	table		= None if args.table is "None" else args.table
-	print host,database,user,password,job,schema,table
+	schema		= None if args.schema == "None" else args.schema
+	table		= None if args.table == "None" else args.table
+	#print host,database,user,password,job,schema,table
 	#creating class object
 	m		= emailCommunication()
 	v		= vacuumFullReindex()
