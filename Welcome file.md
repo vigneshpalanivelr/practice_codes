@@ -4,6 +4,7 @@
 [TOCM]
 
 [TOC]
+
 ## nodes
 ```sh                
 kubectl get nodes
@@ -65,9 +66,9 @@ controlplane $ kubectl delete namespace vignesh-ns
 namespace/vignesh-ns deleted
 ```
 ## pods
-- There are 10 system pods under **kube-system** namespace
-- 4 Important pods
-- 
++ There are 10 system pods under **kube-system** namespace
++ 4 Important pods
+    + 
 ```sh
 kubectl get pods
 kubectl get pods -A
@@ -243,5 +244,5 @@ B --> D{Rhombus}
 C --> D
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM5NTI5MjU1OV19
+eyJoaXN0b3J5IjpbNTUzNjYwOTE5XX0=
 -->
