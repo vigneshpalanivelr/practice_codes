@@ -3,7 +3,10 @@
                 
 1. kubectl get nodes
 2. kubectl describe node \<node>
-
+```sh
+cd dillinger
+docker build -t <youruser>/dillinger:${package.json.version} .
+```
 
 # Welcome to StackEdit!
 
@@ -149,5 +152,5 @@ B --> D{Rhombus}
 C --> D
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3NjI0OTg5ODhdfQ==
+eyJoaXN0b3J5IjpbLTE2NzM1ODIwODhdfQ==
 -->
