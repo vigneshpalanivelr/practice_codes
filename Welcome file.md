@@ -14,8 +14,8 @@ node01         Ready    <none>          33d   v1.29.0
 ```sh
 kubectl get namespace
 kubectl create namespace <ns>
-kubectl describe namespace <ns>
 kubectl delete namespace <ns>
+kubectl describe namespace <ns>
 
 --Ex:------------------------------------------------
 controlplane $ kubectl get namespace
@@ -25,6 +25,7 @@ kube-node-lease      Active   33d
 kube-public          Active   33d
 kube-system          Active   33d
 local-path-storage   Active   33d
+
 --Ex:------------------------------------------------
 controlplane $ vi vignesh-namespace.yaml
 ---
@@ -32,12 +33,14 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: vignesh-ns
+
 --Ex:------------------------------------------------
 controlplane $ kubectl create -f vignesh-namespace.yaml
 namespace/vignesh-ns created
+
 --Ex:------------------------------------------------
-controlplane $ kubectl create -f vignesh-namespace.yaml
-namespace/vignesh-ns created
+controlplane $ kubectl delete namespace vignesh-ns
+namespace/vignesh-ns deleted
 ```
 ## pods
 ```sh
@@ -51,6 +54,10 @@ kubectl create -f vignesh-pod.yaml --namespace=<ns>
 kubectl describe pod <pod>
 kubectl delete pods <pod>
 
+--Ex:------------------------------------------------
+controlplane $ kubectl get pods 
+No resources found in default namespace.
+```
 # Welcome to StackEdit!
 
 Hi! I'm your first Markdown file in **StackEdit**. If you want to learn about StackEdit, you can read me. If you want to play with Markdown, you can edit me. Once you have finished with me, you can create new files by opening the **file explorer** on the left corner of the navigation bar.
@@ -195,5 +202,5 @@ B --> D{Rhombus}
 C --> D
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5NTM3NjI0NTNdfQ==
+eyJoaXN0b3J5IjpbLTI2MzAwNTI0M119
 -->
