@@ -11,12 +11,14 @@ controlplane   Ready    control-plane   33d   v1.29.0
 node01         Ready    <none>          33d   v1.29.0
 ```
 ## namespace
-- By de
+- By default all the resources will be created under **default** namesapce
+- Always set namespace before doing anything
 ```sh
 kubectl get namespace
 kubectl create namespace <ns>
 kubectl delete namespace <ns>
 kubectl describe namespace <ns>
+kubectl config set-context --current --namespace=<ns>
 
 --Ex:------------------------------------------------
 controlplane $ kubectl get namespace
@@ -52,6 +54,10 @@ vignesh-ns           Active   10s
 --Ex:------------------------------------------------
 controlplane $ kubectl delete namespace vignesh-ns
 namespace/vignesh-ns deleted
+
+--Ex:------------------------------------------------
+controlplane $ kubectl config set-context --current --namespace=vignesh-ns
+Context "kubernetes-admin@kubernetes" modified.
 ```
 ## pods
 
@@ -230,5 +236,5 @@ B --> D{Rhombus}
 C --> D
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwMzA3ODA2MDJdfQ==
+eyJoaXN0b3J5IjpbODQ1MjE2NDk0XX0=
 -->
