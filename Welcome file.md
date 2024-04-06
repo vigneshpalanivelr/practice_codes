@@ -16,9 +16,9 @@ node01         Ready    <none>          33d   v1.29.0
 ```sh
 kubectl get namespace
 kubectl create namespace <ns>
+kubectl config set-context --current --namespace=<ns>
 kubectl delete namespace <ns>
 kubectl describe namespace <ns>
-kubectl config set-context --current --namespace=<ns>
 
 --Ex:------------------------------------------------
 controlplane $ kubectl get namespace
@@ -52,15 +52,16 @@ local-path-storage   Active   33d
 vignesh-ns           Active   10s
 
 --Ex:------------------------------------------------
-controlplane $ kubectl delete namespace vignesh-ns
-namespace/vignesh-ns deleted
-
---Ex:------------------------------------------------
 controlplane $ kubectl config set-context --current --namespace=vignesh-ns
 Context "kubernetes-admin@kubernetes" modified.
+
+--Ex:------------------------------------------------
+controlplane $ kubectl delete namespace vignesh-ns
+namespace/vignesh-ns deleted
 ```
 ## pods
-
+- There are 10 system pods under **kube-system** namespace
+- 
 ```sh
 kubectl get pods
 kubectl get pods -A
@@ -236,5 +237,5 @@ B --> D{Rhombus}
 C --> D
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODQ1MjE2NDk0XX0=
+eyJoaXN0b3J5IjpbLTIwMDI4OTk0NjRdfQ==
 -->
