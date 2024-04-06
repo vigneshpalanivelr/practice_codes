@@ -11,6 +11,7 @@ controlplane   Ready    control-plane   33d   v1.29.0
 node01         Ready    <none>          33d   v1.29.0
 ```
 ## namespace
+- By de
 ```sh
 kubectl get namespace
 kubectl create namespace <ns>
@@ -39,10 +40,21 @@ controlplane $ kubectl create -f vignesh-namespace.yaml
 namespace/vignesh-ns created
 
 --Ex:------------------------------------------------
+controlplane $ kubectl get ns
+NAME                 STATUS   AGE
+default              Active   33d
+kube-node-lease      Active   33d
+kube-public          Active   33d
+kube-system          Active   33d
+local-path-storage   Active   33d
+vignesh-ns           Active   10s
+
+--Ex:------------------------------------------------
 controlplane $ kubectl delete namespace vignesh-ns
 namespace/vignesh-ns deleted
 ```
 ## pods
+
 ```sh
 kubectl get pods
 kubectl get pods -A
@@ -218,5 +230,5 @@ B --> D{Rhombus}
 C --> D
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzMjc3NDk3ODddfQ==
+eyJoaXN0b3J5IjpbLTEwMzA3ODA2MDJdfQ==
 -->
