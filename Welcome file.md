@@ -67,8 +67,13 @@ namespace/vignesh-ns deleted
 ```
 ## pods
 + There are 10 system pods under **kube-system** namespace
-+ 4 Important pods
-    + 
++ 4 Important controlplane pods
+    + kube-apiserver
+    + etcd
+    + kube-controller-manager
+    + kube-scheduler
+ + 6 Other pods
+	 + 
 ```sh
 kubectl get pods
 kubectl get pods -A
@@ -244,5 +249,5 @@ B --> D{Rhombus}
 C --> D
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTUzNjYwOTE5XX0=
+eyJoaXN0b3J5IjpbLTQwODQ3MzAyNV19
 -->
