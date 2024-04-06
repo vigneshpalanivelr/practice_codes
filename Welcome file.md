@@ -1,9 +1,9 @@
 # KubeCTL commands
 ## nodes
-                
+```sh                
 kubectl get nodes
 kubectl describe node \<node>
-```sh
+---------------------------
 controlplane$ kubectl get nodes    
 NAME           STATUS   ROLES           AGE   VERSION
 controlplane   Ready    control-plane   33d   v1.29.0
@@ -22,9 +22,17 @@ kube-node-lease      Active   33d
 kube-public          Active   33d
 kube-system          Active   33d
 local-path-storage   Active   33d
-----------------------------------------------
-
 ```
+## pods
+kubectl get pods
+kubectl get pods -A
+kubectl get pods -A -o wide
+kubectl get pods -n <namespace>
+kubectl get pods --selector <key=value> --namespace=vignesh-ns
+kubectl create -f nginx.yaml
+kubectl create -f vignesh-pod.yaml --namespace=vignesh-ns
+kubectl describe pod <pod>
+kubectl delete pods <pod>
 
 # Welcome to StackEdit!
 
@@ -170,5 +178,5 @@ B --> D{Rhombus}
 C --> D
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM5MDA0Nzk5MV19
+eyJoaXN0b3J5IjpbLTU4OTczMTc4Nl19
 -->
