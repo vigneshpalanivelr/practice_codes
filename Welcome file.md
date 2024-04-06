@@ -25,6 +25,14 @@ kube-node-lease      Active   33d
 kube-public          Active   33d
 kube-system          Active   33d
 local-path-storage   Active   33d
+----------------------------------------------------
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: vignesh-ns
+  
 ```
 ## pods
 ```sh
@@ -182,5 +190,5 @@ B --> D{Rhombus}
 C --> D
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTU3MzczMzM2XX0=
+eyJoaXN0b3J5IjpbLTQ3MzExNjU4M119
 -->
