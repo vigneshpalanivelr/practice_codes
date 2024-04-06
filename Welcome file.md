@@ -66,17 +66,18 @@ controlplane $ kubectl delete namespace vignesh-ns
 namespace/vignesh-ns deleted
 ```
 ## pods
-+ There are 10 system pods under **kube-system** namespace
++ There are 12 system pods under **kube-system** namespace
 + 4 Important controlplane pods
     + kube-apiserver
     + etcd
     + kube-controller-manager
     + kube-scheduler
- + 6 Other pods
+ + 6 other pods
 	 + kube-proxy (2)
 	 + coredns(2)
 	 + canal(2)
 	 + calico-kube-controllers
+	 + local-path-provisioner
 ```sh
 kubectl get pods
 kubectl get pods -A
@@ -107,6 +108,23 @@ kube-system          kube-proxy-85drq                          1/1     Running  
 kube-system          kube-proxy-lhxdd                          1/1     Running   1 (8m1s ago)   33d
 kube-system          kube-scheduler-controlplane               1/1     Running   2 (8m2s ago)   33d
 local-path-storage   local-path-provisioner-5d854bc5c4-h55kw   1/1     Running   2 (8m2s ago)   33d
+
+--Ex:------------------------------------------------
+controlplane $ kubectl get pods -A -o wide
+NAMESPACE            NAME                                      READY   STATUS    RESTARTS        AGE   IP            NODE           NOMINATED NODE   READINESS GATES
+kube-system          calico-kube-controllers-9d57d8f49-jvt8w   1/1     Running   3 (8m14s ago)   33d   192.168.0.2   controlplane   <none>           <none>
+kube-system          canal-gjxwj                               2/2     Running   2 (8m13s ago)   33d   172.30.2.2    node01         <none>           <none>
+kube-system          canal-j6pwg                               2/2     Running   2 (8m14s ago)   33d   172.30.1.2    controlplane   <none>           <none>
+kube-system          coredns-86b698fbb6-8q542                  1/1     Running   1 (8m13s ago)   33d   192.168.1.3   node01         <none>           <none>
+kube-system          coredns-86b698fbb6-hqpmj                  1/1     Running   1 (8m13s ago)   33d   192.168.1.2   node01         <none>           <none>
+kube-system          etcd-controlplane                         1/1     Running   2 (8m14s ago)   33d   172.30.1.2    controlplane   <none>           <none>
+kube-system          kube-apiserver-controlplane               1/1     Running   2 (8m14s ago)   33d   172.30.1.2    controlplane   <none>           <none>
+kube-system          kube-controller-manager-controlplane      1/1     Running   2 (8m14s ago)   33d   172.30.1.2    controlplane   <none>           <none>
+kube-system          kube-proxy-85drq                          1/1     Running   2 (8m14s ago)   33d   172.30.1.2    controlplane   <none>           <none>
+kube-system          kube-proxy-lhxdd                          1/1     Running   1 (8m13s ago)   33d   172.30.2.2    node01         <none>           <none>
+kube-system          kube-scheduler-controlplane               1/1     Running   2 (8m14s ago)   33d   172.30.1.2    controlplane   <none>           <none>
+local-path-storage   local-path-provisioner-5d854bc5c4-h55kw   1/1     Running   2 (8m14s ago)   33d   192.168.0.3   controlplane   <none>           <none>
+
 ```
 # Welcome to StackEdit!
 
@@ -252,5 +270,5 @@ B --> D{Rhombus}
 C --> D
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDI3MzgzMzc3XX0=
+eyJoaXN0b3J5IjpbNzk2MzE0ODM0XX0=
 -->
