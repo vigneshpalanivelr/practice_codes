@@ -125,6 +125,30 @@ kube-system          kube-proxy-lhxdd                          1/1     Running  
 kube-system          kube-scheduler-controlplane               1/1     Running   2 (8m14s ago)   33d   172.30.1.2    controlplane   <none>           <none>
 local-path-storage   local-path-provisioner-5d854bc5c4-h55kw   1/1     Running   2 (8m14s ago)   33d   192.168.0.3   controlplane   <none>           <none>
 
+--Ex:------------------------------------------------
+controlplane $ vi vignesh-pod.yaml
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: vignesh-pod-1
+  labels:
+    app: bank-app
+    type: front-end
+spec:
+  containers:
+  - name: vignesh-pod-1
+    image: nginx:1.14.2
+    ports:
+    - containerPort: 80
+
+--Ex:------------------------------------------------
+controlplane $ kubectl create -f vignesh-pod.yaml  
+pod/vignesh-pod-1 created
+
+--Ex:------------------------------------------------
+controlplane $ kubectl get pods -A -o wide | grep vignesh-pod-1
+default              vignesh-pod-1                             0/1     ContainerCreating   0             5s    <none>        node01         <none>           <none>
 ```
 # Welcome to StackEdit!
 
@@ -270,5 +294,5 @@ B --> D{Rhombus}
 C --> D
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzk2MzE0ODM0XX0=
+eyJoaXN0b3J5IjpbLTEwNTMwMzYzMjhdfQ==
 -->
