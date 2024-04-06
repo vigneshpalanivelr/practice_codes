@@ -1,4 +1,9 @@
 # KubeCTL commands
+**Table of Contents**
+
+[TOCM]
+
+[TOC]
 ## nodes
 ```sh                
 kubectl get nodes
@@ -61,6 +66,7 @@ namespace/vignesh-ns deleted
 ```
 ## pods
 - There are 10 system pods under **kube-system** namespace
+- 4 Important pods
 - 
 ```sh
 kubectl get pods
@@ -237,5 +243,5 @@ B --> D{Rhombus}
 C --> D
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwMDI4OTk0NjRdfQ==
+eyJoaXN0b3J5IjpbMTM5NTI5MjU1OV19
 -->
