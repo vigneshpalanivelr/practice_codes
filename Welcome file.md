@@ -4,8 +4,10 @@
 1. kubectl get nodes
 2. kubectl describe node \<node>
 ```sh
-cd dillinger
-docker build -t <youruser>/dillinger:${package.json.version} .
+controlplane $ kubectl get nodes    
+NAME           STATUS   ROLES           AGE   VERSION
+controlplane   Ready    control-plane   33d   v1.29.0
+node01         Ready    <none>          33d   v1.29.0.
 ```
 
 # Welcome to StackEdit!
@@ -152,5 +154,5 @@ B --> D{Rhombus}
 C --> D
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2NzM1ODIwODhdfQ==
+eyJoaXN0b3J5IjpbLTE3MTI3MTk1MTZdfQ==
 -->
