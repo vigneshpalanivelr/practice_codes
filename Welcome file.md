@@ -10,6 +10,21 @@ controlplane   Ready    control-plane   33d   v1.29.0
 node01         Ready    <none>          33d   v1.29.0
 ```
 ## namespace
+kubectl get namespace
+kubectl create namespace <ns>
+kubectl describe namespace <ns>
+kubectl delete namespace <ns>
+```sh
+controlplane$ kubectl get namespace
+NAME                 STATUS   AGE
+default              Active   33d
+kube-node-lease      Active   33d
+kube-public          Active   33d
+kube-system          Active   33d
+local-path-storage   Active   33d
+----------------------------------------------
+
+```
 
 # Welcome to StackEdit!
 
@@ -155,5 +170,5 @@ B --> D{Rhombus}
 C --> D
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3MjYzODM1NThdfQ==
+eyJoaXN0b3J5IjpbMTM5MDA0Nzk5MV19
 -->
