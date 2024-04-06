@@ -73,7 +73,10 @@ namespace/vignesh-ns deleted
     + kube-controller-manager
     + kube-scheduler
  + 6 Other pods
-	 + 
+	 + kube-proxy (2)
+	 + coredns(2)
+	 + canal(2)
+	 + calico-kube-controllers
 ```sh
 kubectl get pods
 kubectl get pods -A
@@ -249,5 +252,5 @@ B --> D{Rhombus}
 C --> D
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQwODQ3MzAyNV19
+eyJoaXN0b3J5IjpbNDI3MzgzMzc3XX0=
 -->
