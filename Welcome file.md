@@ -1,10 +1,9 @@
 # KubeCTL commands
 ## Nodes
                 
-1. Item A
-2. Item B
-3. Item C
-                
+1. kubectl get nodes
+2. kubectl describe node \<node>
+
 
 # Welcome to StackEdit!
 
@@ -150,5 +149,5 @@ B --> D{Rhombus}
 C --> D
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTExOTE5NDEzMF19
+eyJoaXN0b3J5IjpbLTE3NjI0OTg5ODhdfQ==
 -->
