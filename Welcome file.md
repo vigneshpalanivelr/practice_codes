@@ -2,19 +2,22 @@
 ## nodes
 ```sh                
 kubectl get nodes
-kubectl describe node \<node>
----------------------------
+kubectl describe node <node>
+
+--Ex:------------------------------------------------
 controlplane$ kubectl get nodes    
 NAME           STATUS   ROLES           AGE   VERSION
 controlplane   Ready    control-plane   33d   v1.29.0
 node01         Ready    <none>          33d   v1.29.0
 ```
 ## namespace
+```sh
 kubectl get namespace
 kubectl create namespace <ns>
 kubectl describe namespace <ns>
 kubectl delete namespace <ns>
-```sh
+
+--Ex:------------------------------------------------
 controlplane$ kubectl get namespace
 NAME                 STATUS   AGE
 default              Active   33d
@@ -24,13 +27,14 @@ kube-system          Active   33d
 local-path-storage   Active   33d
 ```
 ## pods
+```sh
 kubectl get pods
 kubectl get pods -A
 kubectl get pods -A -o wide
 kubectl get pods -n <namespace>
-kubectl get pods --selector <key=value> --namespace=vignesh-ns
+kubectl get pods --selector <key=value> --namespace=<ns>
 kubectl create -f nginx.yaml
-kubectl create -f vignesh-pod.yaml --namespace=vignesh-ns
+kubectl create -f vignesh-pod.yaml --namespace=<ns>
 kubectl describe pod <pod>
 kubectl delete pods <pod>
 
@@ -178,5 +182,5 @@ B --> D{Rhombus}
 C --> D
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTU4OTczMTc4Nl19
+eyJoaXN0b3J5IjpbOTU3MzczMzM2XX0=
 -->
