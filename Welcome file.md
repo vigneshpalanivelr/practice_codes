@@ -174,12 +174,14 @@ controlplane $ kubectl create -f vignesh-pod.yaml
 pod/vignesh-pod-1 created
 
 --Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
-controlplane $ kubectl get pods -A -o wide | grep vignesh-pod
 NAMESPACE            NAME                                      READY   STATUS    RESTARTS      AGE    IP            NODE           NOMINATED NODE   READINESS GATES
 default              vignesh-pod-1                             1/1     Running   0             118s   192.168.1.4   node01         <none>           <none>
 vignesh-ns           vignesh-pod-2                             1/1     Running   0             7s     192.168.1.5   node01         <none>           <none>
 
 --Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
+controlplane $ kubectl get pods --selector app=bank-db --namespace=vignesh-ns
+NAME            READY   STATUS    RESTARTS   AGE
+vignesh-pod-2   1/1     Running   0          4m45s
 
 ```
 # Welcome to StackEdit!
@@ -326,5 +328,5 @@ B --> D{Rhombus}
 C --> D
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3MDE2NDg5OV19
+eyJoaXN0b3J5IjpbMTA2OTI0Mzk2NSwtMTcwMTY0ODk5XX0=
 -->
