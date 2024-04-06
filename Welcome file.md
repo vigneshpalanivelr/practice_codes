@@ -147,8 +147,9 @@ controlplane $ kubectl create -f vignesh-pod.yaml
 pod/vignesh-pod-1 created
 
 --Ex:------------------------------------------------
-controlplane $ kubectl get pods -A -o wide | grep vignesh-pod-1
-default              vignesh-pod-1                             0/1     ContainerCreating   0             5s    <none>        node01         <none>           <none>
+controlplane $ kubectl get pods -A | grep vignesh-pod-1
+NAMESPACE            NAME                                      READY   STATUS    RESTARTS       AGE
+default              vignesh-pod-1                             0/1     ContainerCreating   0             5s
 ```
 # Welcome to StackEdit!
 
@@ -294,5 +295,5 @@ B --> D{Rhombus}
 C --> D
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwNTMwMzYzMjhdfQ==
+eyJoaXN0b3J5IjpbLTE0ODg5NzY1NDBdfQ==
 -->
