@@ -47,16 +47,32 @@ namespace/vignesh-ns deleted
 kubectl get pods
 kubectl get pods -A
 kubectl get pods -A -o wide
-kubectl get pods -n <namespace>
-kubectl get pods --selector <key=value> --namespace=<ns>
-kubectl create -f nginx.yaml
-kubectl create -f vignesh-pod.yaml --namespace=<ns>
+kubectl get pods -n vignesh-ns
+kubectl get pods --selector <key=value> --namespace=vignesh-ns
+kubectl create -f vignesh-pod.yaml
+kubectl create -f vignesh-pod.yaml --namespace=vignesh-ns
 kubectl describe pod <pod>
 kubectl delete pods <pod>
 
 --Ex:------------------------------------------------
 controlplane $ kubectl get pods 
 No resources found in default namespace.
+
+--Ex:------------------------------------------------
+controlplane $ kubectl get pods -A
+NAMESPACE            NAME                                      READY   STATUS    RESTARTS       AGE
+kube-system          calico-kube-controllers-9d57d8f49-jvt8w   1/1     Running   3 (8m2s ago)   33d
+kube-system          canal-gjxwj                               2/2     Running   2 (8m1s ago)   33d
+kube-system          canal-j6pwg                               2/2     Running   2 (8m2s ago)   33d
+kube-system          coredns-86b698fbb6-8q542                  1/1     Running   1 (8m1s ago)   33d
+kube-system          coredns-86b698fbb6-hqpmj                  1/1     Running   1 (8m1s ago)   33d
+kube-system          etcd-controlplane                         1/1     Running   2 (8m2s ago)   33d
+kube-system          kube-apiserver-controlplane               1/1     Running   2 (8m2s ago)   33d
+kube-system          kube-controller-manager-controlplane      1/1     Running   2 (8m2s ago)   33d
+kube-system          kube-proxy-85drq                          1/1     Running   2 (8m2s ago)   33d
+kube-system          kube-proxy-lhxdd                          1/1     Running   1 (8m1s ago)   33d
+kube-system          kube-scheduler-controlplane               1/1     Running   2 (8m2s ago)   33d
+local-path-storage   local-path-provisioner-5d854bc5c4-h55kw   1/1     Running   2 (8m2s ago)   33d
 ```
 # Welcome to StackEdit!
 
@@ -202,5 +218,5 @@ B --> D{Rhombus}
 C --> D
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTI2MzAwNTI0M119
+eyJoaXN0b3J5IjpbLTEzMjc3NDk3ODddfQ==
 -->
