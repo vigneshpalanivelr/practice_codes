@@ -5,7 +5,7 @@ kubectl get nodes
 kubectl describe node <node>
 
 --Ex:------------------------------------------------
-controlplane$ kubectl get nodes    
+controlplane $ kubectl get nodes    
 NAME           STATUS   ROLES           AGE   VERSION
 controlplane   Ready    control-plane   33d   v1.29.0
 node01         Ready    <none>          33d   v1.29.0
@@ -18,21 +18,26 @@ kubectl describe namespace <ns>
 kubectl delete namespace <ns>
 
 --Ex:------------------------------------------------
-controlplane$ kubectl get namespace
+controlplane $ kubectl get namespace
 NAME                 STATUS   AGE
 default              Active   33d
 kube-node-lease      Active   33d
 kube-public          Active   33d
 kube-system          Active   33d
 local-path-storage   Active   33d
-----------------------------------------------------
-
+--Ex:------------------------------------------------
+controlplane $ vi vignesh-namespace.yaml
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
   name: vignesh-ns
-  
+--Ex:------------------------------------------------
+controlplane $ kubectl create -f vignesh-namespace.yaml
+namespace/vignesh-ns created
+--Ex:------------------------------------------------
+controlplane $ kubectl create -f vignesh-namespace.yaml
+namespace/vignesh-ns created
 ```
 ## pods
 ```sh
@@ -190,5 +195,5 @@ B --> D{Rhombus}
 C --> D
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ3MzExNjU4M119
+eyJoaXN0b3J5IjpbLTE5NTM3NjI0NTNdfQ==
 -->
