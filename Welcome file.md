@@ -146,10 +146,32 @@ spec:
 controlplane $ kubectl create -f vignesh-pod.yaml  
 pod/vignesh-pod-1 created
 
---Ex:------------------------------------------------
+--Ex:--------------------------------------------------------------------------------------------------------------------------------------------------------------
 controlplane $ kubectl get pods -A | grep vignesh-pod-1
 NAMESPACE            NAME                                      READY   STATUS    RESTARTS       AGE
 default              vignesh-pod-1                             0/1     ContainerCreating   0             5s
+
+controlplane $ vi vignesh-pod.yaml
+=======================================================
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: vignesh-pod-2
+  namespace: vignesh-ns
+  labels:
+    app: bank-db
+    type: back-end
+spec:
+  containers:
+  - name: vignesh-pod-2
+    image: nginx:1.14.2
+    ports:
+    - containerPort: 80
+=======================================================
+controlplane $ kubectl create -f vignesh-pod.yaml 
+pod/vignesh-pod-1 created
+
 ```
 # Welcome to StackEdit!
 
@@ -295,5 +317,5 @@ B --> D{Rhombus}
 C --> D
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0ODg5NzY1NDBdfQ==
+eyJoaXN0b3J5IjpbMTM0ODcyNzkwMV19
 -->
