@@ -1,6 +1,10 @@
 # KubeCTL commands
 ## Nodes
-
+                
+1. Item A
+2. Item B
+3. Item C
+                
 
 # Welcome to StackEdit!
 
@@ -146,5 +150,5 @@ B --> D{Rhombus}
 C --> D
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTUwNjk3Mzg3NV19
+eyJoaXN0b3J5IjpbMTExOTE5NDEzMF19
 -->
