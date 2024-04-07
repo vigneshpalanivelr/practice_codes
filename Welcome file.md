@@ -196,8 +196,96 @@ NAME            READY   STATUS    RESTARTS   AGE
 vignesh-pod-2   1/1     Running   0          4m45s
 ```
 ## service
+```sh
+kubectl get services
 
+--Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
+controlplane $ kubectl get services
+No resources found in vignesh-ns namespace.
+
+--Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
+controlplane $ kubectl config set-context --current --namespace=default
+Context "kubernetes-admin@kubernetes" modified.
+
+--Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
+controlplane $ kubectl get services
+NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   33d
+
+controlplane $ vi vignesh-service.yaml
+=======================================================
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vignesh-service
+spec:
+  ports:
+    - targetPort: 80
+      port: 80
+  selector:
+    app: bank-db
+    type: back-end
+=======================================================
+controlplane $ kubectl create -f vignesh-service.yaml --namespace=vignesh-ns
+service/vignesh-service created
+
+controlplane $ kubectl get service
+NAME              TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+kubernetes        ClusterIP   10.96.0.1       <none>        443/TCP   33d
+vignesh-service   ClusterIP   10.96.234.232   <none>        80/TCP    6s
+
+controlplane $ kubectl get pods
+NAME            READY   STATUS    RESTARTS   AGE
+vignesh-pod-2   1/1     Running   0          38m
+
+controlplane $ kubectl config set-context --current --namespace=vignesh-ns
+Context "kubernetes-admin@kubernetes" modified.
+
+controlplane $ kubectl get pods
+NAME            READY   STATUS    RESTARTS   AGE
+vignesh-pod-1   1/1     Running   0          40m
+
+controlplane $ kubectl get services
+NAME              TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+vignesh-service   ClusterIP   10.98.253.142   <none>        80/TCP    91s
+
+controlplane $ curl http://10.98.253.142:80
+
+
+controlplane $ vi vignesh-service.yaml 
+=======================================================
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vignesh-service
+spec:
+  type: NodePort
+  ports:
+    - targetPort: 80
+      port: 80
+      nodePort: 32000
+  selector:
+    app: bank-db
+    type: back-end
+=======================================================
+
+controlplane $ kubectl delete service vignesh-service
+service "vignesh-service" deleted
+
+controlplane $ kubectl create -f vignesh-service.yaml 
+service/vignesh-service created
+
+controlplane $ kubectl get services
+NAME              TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+vignesh-service   NodePort   10.98.125.192   <none>        80:32000/TCP   37s
+
+controlplane $ curl http://10.98.125.192:80
+
+```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTgyODYwNzYxOSwtMTUxODQ0MTI0MiwtMT
-Y1ODY2OTQzNSwtMTgyNTUwNTI2NSwtMTcwMTY0ODk5XX0=
+eyJoaXN0b3J5IjpbLTExODIzMzM2MDAsMTgyODYwNzYxOSwtMT
+UxODQ0MTI0MiwtMTY1ODY2OTQzNSwtMTgyNTUwNTI2NSwtMTcw
+MTY0ODk5XX0=
 -->
