@@ -128,7 +128,7 @@ kube-system          kube-proxy-85drq                          1/1     Running  
 kube-system          kube-proxy-lhxdd                          1/1     Running   1 (8m13s ago)   33d   172.30.2.2    node01         <none>           <none>
 kube-system          kube-scheduler-controlplane               1/1     Running   2 (8m14s ago)   33d   172.30.1.2    controlplane   <none>           <none>
 local-path-storage   local-path-provisioner-5d854bc5c4-h55kw   1/1     Running   2 (8m14s ago)   33d   192.168.0.3   controlplane   <none>           <none>
---Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
+--Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------                 
 ```
 ```yaml
 ---
@@ -297,7 +297,7 @@ vignesh-service   NodePort   10.98.125.192   <none>        80:32000/TCP   37s
 controlplane $ curl http://10.98.125.192:80
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTczMTA5ODkwLC0zNjcxNTA4OCwyMDgxOD
+eyJoaXN0b3J5IjpbNjA5MTgyMTYwLC0zNjcxNTA4OCwyMDgxOD
 U5MTYyLDE4Mjg2MDc2MTksLTE1MTg0NDEyNDIsLTE2NTg2Njk0
 MzUsLTE4MjU1MDUyNjUsLTE3MDE2NDg5OV19
 -->
