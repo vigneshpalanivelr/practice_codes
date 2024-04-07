@@ -193,8 +193,9 @@ controlplane $ kubectl get pods --selector app=bank-db --namespace=vignesh-ns
 NAME            READY   STATUS    RESTARTS   AGE
 vignesh-pod-2   1/1     Running   0          4m45s
 ```
+## service
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODM4MTE4Mjc1LC0xNTE4NDQxMjQyLC0xNj
-U4NjY5NDM1LC0xODI1NTA1MjY1LC0xNzAxNjQ4OTldfQ==
+eyJoaXN0b3J5IjpbMTY3NzAwNjYyMCwtMTUxODQ0MTI0MiwtMT
+Y1ODY2OTQzNSwtMTgyNTUwNTI2NSwtMTcwMTY0ODk5XX0=
 -->
