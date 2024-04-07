@@ -199,6 +199,7 @@ vignesh-pod-2   1/1     Running   0          4m45s
 ```sh
 kubectl get services
 kubectl create -f vignesh-service.yaml --namespace=vignesh-ns
+kubectl delete service vignesh-service
 
 
 --Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -299,7 +300,7 @@ vignesh-service   NodePort   10.98.125.192   <none>        80:32000/TCP   37s
 controlplane $ curl http://10.98.125.192:80
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzODkxMzg4NjYsMTgyODYwNzYxOSwtMT
-UxODQ0MTI0MiwtMTY1ODY2OTQzNSwtMTgyNTUwNTI2NSwtMTcw
-MTY0ODk5XX0=
+eyJoaXN0b3J5IjpbMjA4MTg1OTE2MiwxODI4NjA3NjE5LC0xNT
+E4NDQxMjQyLC0xNjU4NjY5NDM1LC0xODI1NTA1MjY1LC0xNzAx
+NjQ4OTldfQ==
 -->
