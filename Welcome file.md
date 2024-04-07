@@ -230,8 +230,10 @@ spec:
     type: back-end
 ```
 ```sh
+--Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
 controlplane $ kubectl create -f vignesh-service.yaml --namespace=vignesh-ns
 service/vignesh-service created
+
 --Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
 controlplane $ kubectl get service
 NAME              TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
@@ -289,7 +291,7 @@ controlplane $ curl http://10.98.125.192:80
 
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2NzM4MjE5NTQsMTgyODYwNzYxOSwtMT
-UxODQ0MTI0MiwtMTY1ODY2OTQzNSwtMTgyNTUwNTI2NSwtMTcw
-MTY0ODk5XX0=
+eyJoaXN0b3J5IjpbLTYwNTAzNTkxMiwxODI4NjA3NjE5LC0xNT
+E4NDQxMjQyLC0xNjU4NjY5NDM1LC0xODI1NTA1MjY1LC0xNzAx
+NjQ4OTldfQ==
 -->
