@@ -99,15 +99,14 @@ kubectl create -f vignesh-pod.yaml --namespace=vignesh-ns
 kubectl describe pod &lt;pod&gt;
 kubectl delete pods &lt;pod&gt;
 
---Ex:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-controlplane $ kubectl get pods 
+--Ex:--------------------------------------------------------------------------------------------------------------------------------------------------controlplane $ kubectl get pods 
 No resources found in default namespace.
 
---Ex:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--Ex:--------------------------------------------------------------------------------------------------------------------------------------------------------
 controlplane $ kubectl get pods -A
 NAMESPACE            NAME                                      READY   STATUS    RESTARTS       AGE
 kube-system          calico-kube-controllers-9d57d8f49-jvt8w   1/1     Running   3 (8m2s ago)   33d
-kube-system          canal-gjxwj                               2/2     Running   2 (8m1s ago)   33d
+kube-system          c           2/2     Running   2 (8m1s ago)   33d
 kube-system          canal-j6pwg                               2/2     Running   2 (8m2s ago)   33d
 kube-system          coredns-86b698fbb6-8q542                  1/1     Running   1 (8m1s ago)   33d
 kube-system          coredns-86b698fbb6-hqpmj                  1/1     Running   1 (8m1s ago)   33d
@@ -118,9 +117,9 @@ kube-system          kube-proxy-85drq                          1/1     Running  
 kube-system          kube-proxy-lhxdd                          1/1     Running   1 (8m1s ago)   33d
 kube-system          kube-scheduler-controlplane               1/1     Running   2 (8m2s ago)   33d
 local-path-storage   local-path-provisioner-5d854bc5c4-h55kw   1/1     Running   2 (8m2s ago)   33d
---Ex:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--Ex:------------------------------------------------------------------------------------------------------------------------------------
 controlplane $ kubectl get pods -A -o wide
-NAMESPACE            NAME                                      READY   STATUS    RESTARTS        AGE   IP            NODE           NOMINATED NODE   READINESS GATES
+NAMESPACE            NAME                         READY   STATUS    RESTARTS        AGE   IP            NODE           NOMINATED NODE   READINESS GATES
 kube-system          calico-kube-controllers-9d57d8f49-jvt8w   1/1     Running   3 (8m14s ago)   33d   192.168.0.2   controlplane   &lt;none&gt;           &lt;none&gt;
 kube-system          canal-gjxwj                               2/2     Running   2 (8m13s ago)   33d   172.30.2.2    node01         &lt;none&gt;           &lt;none&gt;
 kube-system          canal-j6pwg                               2/2     Running   2 (8m14s ago)   33d   172.30.1.2    controlplane   &lt;none&gt;           &lt;none&gt;
@@ -133,8 +132,7 @@ kube-system          kube-proxy-85drq                          1/1     Running  
 kube-system          kube-proxy-lhxdd                          1/1     Running   1 (8m13s ago)   33d   172.30.2.2    node01         &lt;none&gt;           &lt;none&gt;
 kube-system          kube-scheduler-controlplane               1/1     Running   2 (8m14s ago)   33d   172.30.1.2    controlplane   &lt;none&gt;           &lt;none&gt;
 local-path-storage   local-path-provisioner-5d854bc5c4-h55kw   1/1     Running   2 (8m14s ago)   33d   192.168.0.3   controlplane   &lt;none&gt;           &lt;none&gt;
---Ex:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-</code></pre>
+--Ex:----------------------------------------------------------------------------------------------------------------------------------------------------</code></pre>
 <pre class=" language-yaml"><code class="prism  language-yaml"><span class="token punctuation">---</span>
 <span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> v1
 <span class="token key atrule">kind</span><span class="token punctuation">:</span> Pod
@@ -291,5 +289,63 @@ NAME              TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
 vignesh-service   NodePort   10.98.125.192   &lt;none&gt;        80:32000/TCP   37s
 
 controlplane $ curl http://10.98.125.192:80
-</code></pre>
+</code></pre>-
+apiVersion: v1
+kind: Pod
+metadata:
+  name: vignesh-pod-1
+  labels:
+    app: bank-app
+    type: front-end
+spec:
+  containers:
+  - name: vignesh-pod-1
+    image: nginx:1.14.2
+    ports:
+    - containerPort: 80
 
+--Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
+controlplane $ kubectl create -f vignesh-pod.yaml  
+pod/vignesh-pod-1 created
+
+--Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
+controlplane $ kubectl get pods -A | grep vignesh-pod-1
+NAMESPACE            NAME                                      READY   STATUS    RESTARTS       AGE
+default              vignesh-pod-1                             0/1     ContainerCreating   0             5s
+
+--Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
+controlplane $ vi vignesh-pod.yaml
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: vignesh-pod-2
+  namespace: vignesh-ns
+  labels:
+    app: bank-db
+    type: back-end
+spec:
+  containers:
+  - name: vignesh-pod-2
+    image: nginx:1.14.2
+    ports:
+    - containerPort: 80
+
+--Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
+controlplane $ kubectl create -f vignesh-pod.yaml 
+pod/vignesh-pod-1 created
+
+--Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
+controlplane $ kubectl get pods -A | grep vignesh-pod
+NAMESPACE            NAME                                      READY   STATUS    RESTARTS      AGE    IP            NODE           NOMINATED NODE   READINESS GATES
+default              vignesh-pod-1                             1/1     Running   0             118s   192.168.1.4   node01         &lt;none&gt;           &lt;none&gt;
+vignesh-ns           vignesh-pod-2                             1/1     Running   0             7s     192.168.1.5   node01         &lt;none&gt;           &lt;none&gt;
+
+--Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
+controlplane $ kubectl get pods --selector app=bank-db --namespace=vignesh-ns
+NAME            READY   STATUS    RESTARTS   AGE
+vignesh-pod-2   1/1     Running   0          4m45s
+
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMTI2NDIzNDEwMl19
+-->
