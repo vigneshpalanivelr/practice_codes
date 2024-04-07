@@ -152,7 +152,6 @@ default              vignesh-pod-1                             0/1     Container
 
 --Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
 controlplane $ vi vignesh-pod.yaml
----
 apiVersion: v1
 kind: Pod
 metadata:
@@ -326,6 +325,6 @@ B --> D{Rhombus}
 C --> D
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTc0MjczODU3OCwtMTgyNTUwNTI2NSwtMT
-cwMTY0ODk5XX0=
+eyJoaXN0b3J5IjpbLTE2NTg2Njk0MzUsLTE4MjU1MDUyNjUsLT
+E3MDE2NDg5OV19
 -->
