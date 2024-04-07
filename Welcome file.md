@@ -212,9 +212,6 @@ Context "kubernetes-admin@kubernetes" modified.
 controlplane $ kubectl get services
 NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
 kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   33d
-
---Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
-controlplane $ vi vignesh-service.yaml
 ```
 ```yaml
 ---
@@ -232,6 +229,7 @@ spec:
 ```
 ```sh
 --Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
+controlplane $ vi vignesh-service.yaml
 controlplane $ kubectl create -f vignesh-service.yaml --namespace=vignesh-ns
 service/vignesh-service created
 
@@ -298,7 +296,7 @@ vignesh-service   NodePort   10.98.125.192   <none>        80:32000/TCP   37s
 controlplane $ curl http://10.98.125.192:80
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM2NzE1MDg4LDIwODE4NTkxNjIsMTgyOD
-YwNzYxOSwtMTUxODQ0MTI0MiwtMTY1ODY2OTQzNSwtMTgyNTUw
-NTI2NSwtMTcwMTY0ODk5XX0=
+eyJoaXN0b3J5IjpbLTE2Mjk5NzExNzQsLTM2NzE1MDg4LDIwOD
+E4NTkxNjIsMTgyODYwNzYxOSwtMTUxODQ0MTI0MiwtMTY1ODY2
+OTQzNSwtMTgyNTUwNTI2NSwtMTcwMTY0ODk5XX0=
 -->
