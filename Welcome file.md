@@ -184,6 +184,7 @@ controlplane $ kubectl create -f vignesh-pod.yaml
 pod/vignesh-pod-1 created
 
 --Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
+controlplane $ kubectl get pods -A | grep vignesh-pod
 NAMESPACE            NAME                                      READY   STATUS    RESTARTS      AGE    IP            NODE           NOMINATED NODE   READINESS GATES
 default              vignesh-pod-1                             1/1     Running   0             118s   192.168.1.4   node01         <none>           <none>
 vignesh-ns           vignesh-pod-2                             1/1     Running   0             7s     192.168.1.5   node01         <none>           <none>
@@ -196,6 +197,6 @@ vignesh-pod-2   1/1     Running   0          4m45s
 ## service
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY3NzAwNjYyMCwtMTUxODQ0MTI0MiwtMT
+eyJoaXN0b3J5IjpbLTgzODE2NzY2NywtMTUxODQ0MTI0MiwtMT
 Y1ODY2OTQzNSwtMTgyNTUwNTI2NSwtMTcwMTY0ODk5XX0=
 -->
