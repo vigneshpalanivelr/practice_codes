@@ -200,6 +200,7 @@ vignesh-pod-2   1/1     Running   0          4m45s
 kubectl get services
 kubectl create -f vignesh-service.yaml --namespace=vignesh-ns
 
+
 --Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
 controlplane $ kubectl get services
 No resources found in vignesh-ns namespace.
@@ -298,7 +299,7 @@ vignesh-service   NodePort   10.98.125.192   <none>        80:32000/TCP   37s
 controlplane $ curl http://10.98.125.192:80
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTY4Mzk1NDc1NiwxODI4NjA3NjE5LC0xNT
-E4NDQxMjQyLC0xNjU4NjY5NDM1LC0xODI1NTA1MjY1LC0xNzAx
-NjQ4OTldfQ==
+eyJoaXN0b3J5IjpbLTEzODkxMzg4NjYsMTgyODYwNzYxOSwtMT
+UxODQ0MTI0MiwtMTY1ODY2OTQzNSwtMTgyNTUwNTI2NSwtMTcw
+MTY0ODk5XX0=
 -->
