@@ -92,11 +92,12 @@ kubectl create -f vignesh-pod.yaml --namespace=vignesh-ns
 kubectl describe pod <pod>
 kubectl delete pods <pod>
 
---Ex:------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
 controlplane $ kubectl get pods 
 No resources found in default namespace.
 
---Ex:------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 controlplane $ kubectl get pods -A
 NAMESPACE            NAME                                      READY   STATUS    RESTARTS       AGE
 kube-system          calico-kube-controllers-9d57d8f49-jvt8w   1/1     Running   3 (8m2s ago)   33d
@@ -111,7 +112,9 @@ kube-system          kube-proxy-85drq                          1/1     Running  
 kube-system          kube-proxy-lhxdd                          1/1     Running   1 (8m1s ago)   33d
 kube-system          kube-scheduler-controlplane               1/1     Running   2 (8m2s ago)   33d
 local-path-storage   local-path-provisioner-5d854bc5c4-h55kw   1/1     Running   2 (8m2s ago)   33d
---Ex:------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+--Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 controlplane $ kubectl get pods -A -o wide
 NAMESPACE            NAME                                      READY   STATUS    RESTARTS        AGE   IP            NODE           NOMINATED NODE   READINESS GATES
 kube-system          calico-kube-controllers-9d57d8f49-jvt8w   1/1     Running   3 (8m14s ago)   33d   192.168.0.2   controlplane   <none>           <none>
@@ -126,7 +129,8 @@ kube-system          kube-proxy-85drq                          1/1     Running  
 kube-system          kube-proxy-lhxdd                          1/1     Running   1 (8m13s ago)   33d   172.30.2.2    node01         <none>           <none>
 kube-system          kube-scheduler-controlplane               1/1     Running   2 (8m14s ago)   33d   172.30.1.2    controlplane   <none>           <none>
 local-path-storage   local-path-provisioner-5d854bc5c4-h55kw   1/1     Running   2 (8m14s ago)   33d   192.168.0.3   controlplane   <none>           <none>
---Ex:------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+--Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
 ```
 ```yaml
 ---
@@ -295,7 +299,7 @@ vignesh-service   NodePort   10.98.125.192   <none>        80:32000/TCP   37s
 controlplane $ curl http://10.98.125.192:80
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTYwNDQ2NTMyNCwtMTUyOTczNDk5MCwtOD
+eyJoaXN0b3J5IjpbLTMzMjMwNTUxNCwtMTUyOTczNDk5MCwtOD
 czNTIxNjc4LC0zNjcxNTA4OCwyMDgxODU5MTYyLDE4Mjg2MDc2
 MTksLTE1MTg0NDEyNDIsLTE2NTg2Njk0MzUsLTE4MjU1MDUyNj
 UsLTE3MDE2NDg5OV19
