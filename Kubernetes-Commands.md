@@ -119,7 +119,6 @@ kube-system          kube-proxy-85drq                          1/1     Running  
 kube-system          kube-proxy-lhxdd                          1/1     Running   1 (8m1s ago)   33d
 kube-system          kube-scheduler-controlplane               1/1     Running   2 (8m2s ago)   33d
 local-path-storage   local-path-provisioner-5d854bc5c4-h55kw   1/1     Running   2 (8m2s ago)   33d
-
 --Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
 controlplane $ kubectl get pods -A -o wide
 NAMESPACE            NAME                                      READY   STATUS    RESTARTS        AGE   IP            NODE           NOMINATED NODE   READINESS GATES
