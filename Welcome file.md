@@ -35,7 +35,7 @@ kube-public          Active   33d
 kube-system          Active   33d
 local-path-storage   Active   33d
 
---Ex:------------------------------------------------
+--Ex:-------------------------------------------------
 controlplane $ vi vignesh-namespace.yaml
 ---
 apiVersion: v1
@@ -327,5 +327,6 @@ B --> D{Rhombus}
 C --> D
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4MjU1MDUyNjUsLTE3MDE2NDg5OV19
+eyJoaXN0b3J5IjpbMTI2MTgxOTAsLTE4MjU1MDUyNjUsLTE3MD
+E2NDg5OV19
 -->
