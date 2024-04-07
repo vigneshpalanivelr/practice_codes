@@ -136,7 +136,8 @@ local-path-storage   local-path-provisioner-5d854bc5c4-h55kw   1/1     Running  
 --Ex:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 controlplane $ vi vignesh-pod.yaml
 
---Ex:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--Ex:------------------------------------------------------------------------------------------------------------------------------
+
 ```
 
 ```yaml
@@ -308,7 +309,7 @@ vignesh-service   NodePort   10.98.125.192   <none>        80:32000/TCP   37s
 controlplane $ curl http://10.98.125.192:80
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0NDgyNTQxMzksLTE4NzM4NzY4MDYsMz
+eyJoaXN0b3J5IjpbLTIxMTIzMzk4NDksLTE4NzM4NzY4MDYsMz
 I0NjM0OTY2LC0zMzIzMDU1MTQsLTE1Mjk3MzQ5OTAsLTg3MzUy
 MTY3OCwtMzY3MTUwODgsMjA4MTg1OTE2MiwxODI4NjA3NjE5LC
 0xNTE4NDQxMjQyLC0xNjU4NjY5NDM1LC0xODI1NTA1MjY1LC0x
