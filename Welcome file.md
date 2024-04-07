@@ -177,7 +177,8 @@ spec:
     image: nginx:1.14.2
     ports:
     - containerPort: 80
-
+```
+```sh
 --Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
 controlplane $ kubectl create -f vignesh-pod.yaml 
 pod/vignesh-pod-1 created
@@ -336,6 +337,6 @@ B --> D{Rhombus}
 C --> D
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTkxNDQxMDcyMywtMTY1ODY2OTQzNSwtMT
-gyNTUwNTI2NSwtMTcwMTY0ODk5XX0=
+eyJoaXN0b3J5IjpbLTE1MTg0NDEyNDIsLTE2NTg2Njk0MzUsLT
+E4MjU1MDUyNjUsLTE3MDE2NDg5OV19
 -->
