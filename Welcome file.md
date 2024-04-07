@@ -245,22 +245,26 @@ controlplane $ kubectl get pods
 NAME            READY   STATUS    RESTARTS   AGE
 vignesh-pod-2   1/1     Running   0          38m
 
+--Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
 controlplane $ kubectl config set-context --current --namespace=vignesh-ns
 Context "kubernetes-admin@kubernetes" modified.
 
+--Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
 controlplane $ kubectl get pods
 NAME            READY   STATUS    RESTARTS   AGE
 vignesh-pod-1   1/1     Running   0          40m
 
+--Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
 controlplane $ kubectl get services
 NAME              TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
 vignesh-service   ClusterIP   10.98.253.142   <none>        80/TCP    91s
 
 controlplane $ curl http://10.98.253.142:80
 
-
+--Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
 controlplane $ vi vignesh-service.yaml 
-=======================================================
+```
+```yaml
 ---
 apiVersion: v1
 kind: Service
@@ -275,8 +279,9 @@ spec:
   selector:
     app: bank-db
     type: back-end
-=======================================================
-
+```
+```sh
+--Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
 controlplane $ kubectl delete service vignesh-service
 service "vignesh-service" deleted
 
@@ -291,7 +296,7 @@ controlplane $ curl http://10.98.125.192:80
 
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTYwNTAzNTkxMiwxODI4NjA3NjE5LC0xNT
+eyJoaXN0b3J5IjpbMTE5MTYyNzIzNCwxODI4NjA3NjE5LC0xNT
 E4NDQxMjQyLC0xNjU4NjY5NDM1LC0xODI1NTA1MjY1LC0xNzAx
 NjQ4OTldfQ==
 -->
