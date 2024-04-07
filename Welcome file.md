@@ -92,7 +92,6 @@ kubectl create -f vignesh-pod.yaml --namespace=vignesh-ns
 kubectl describe pod <pod>
 kubectl delete pods <pod>
 
-
 --Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
 controlplane $ kubectl get pods 
 No resources found in default namespace.
@@ -296,7 +295,7 @@ vignesh-service   NodePort   10.98.125.192   <none>        80:32000/TCP   37s
 controlplane $ curl http://10.98.125.192:80
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1NDM5MjI5MTIsLTM2NzE1MDg4LDIwOD
-E4NTkxNjIsMTgyODYwNzYxOSwtMTUxODQ0MTI0MiwtMTY1ODY2
-OTQzNSwtMTgyNTUwNTI2NSwtMTcwMTY0ODk5XX0=
+eyJoaXN0b3J5IjpbLTg3MzUyMTY3OCwtMzY3MTUwODgsMjA4MT
+g1OTE2MiwxODI4NjA3NjE5LC0xNTE4NDQxMjQyLC0xNjU4NjY5
+NDM1LC0xODI1NTA1MjY1LC0xNzAxNjQ4OTldfQ==
 -->
