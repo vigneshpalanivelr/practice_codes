@@ -118,7 +118,6 @@ kube-system          kube-scheduler-controlplane               1/1     Running  
 local-path-storage   local-path-provisioner-5d854bc5c4-h55kw   1/1     Running   2 (8m2s ago)   33d
 
 --Ex:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 controlplane $ kubectl get pods -A -o wide
 NAMESPACE            NAME                                      READY   STATUS    RESTARTS        AGE   IP            NODE           NOMINATED NODE   READINESS GATES
 kube-system          calico-kube-controllers-9d57d8f49-jvt8w   1/1     Running   3 (8m14s ago)   33d   192.168.0.2   controlplane   <none>           <none>
@@ -136,7 +135,10 @@ local-path-storage   local-path-provisioner-5d854bc5c4-h55kw   1/1     Running  
 
 --Ex:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 controlplane $ vi vignesh-pod.yaml
+
+--Ex:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ```
+
 ```yaml
 ---
 apiVersion: v1
@@ -153,6 +155,7 @@ spec:
     ports:
     - containerPort: 80
 ```
+
 ```sh
 --Ex:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 controlplane $ kubectl create -f vignesh-pod.yaml  
@@ -167,6 +170,7 @@ default              vignesh-pod-1                             0/1     Container
 controlplane $ kubectl create -f vignesh-pod.yaml 
 pod/vignesh-pod-1 created
 ```
+
 ```yaml
 ---
 apiVersion: v1
@@ -304,9 +308,9 @@ vignesh-service   NodePort   10.98.125.192   <none>        80:32000/TCP   37s
 controlplane $ curl http://10.98.125.192:80
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4NzM4NzY4MDYsMzI0NjM0OTY2LC0zMz
-IzMDU1MTQsLTE1Mjk3MzQ5OTAsLTg3MzUyMTY3OCwtMzY3MTUw
-ODgsMjA4MTg1OTE2MiwxODI4NjA3NjE5LC0xNTE4NDQxMjQyLC
-0xNjU4NjY5NDM1LC0xODI1NTA1MjY1LC0xNzAxNjQ4OTldfQ==
-
+eyJoaXN0b3J5IjpbLTE0NDgyNTQxMzksLTE4NzM4NzY4MDYsMz
+I0NjM0OTY2LC0zMzIzMDU1MTQsLTE1Mjk3MzQ5OTAsLTg3MzUy
+MTY3OCwtMzY3MTUwODgsMjA4MTg1OTE2MiwxODI4NjA3NjE5LC
+0xNTE4NDQxMjQyLC0xNjU4NjY5NDM1LC0xODI1NTA1MjY1LC0x
+NzAxNjQ4OTldfQ==
 -->
