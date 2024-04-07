@@ -308,10 +308,93 @@ vignesh-service   NodePort   10.98.125.192   <none>        80:32000/TCP   37s
 
 controlplane $ curl http://10.98.125.192:80
 ```
+
+## taint, tolerence & untaint
+```sh
+kubectl taint node node01 env=prod:NoSchedule
+kubectl describe node node01 | grep -i taint
+kubectl run usa-pod --image nginx
+kubectl run ind-pod --image nginx --dry-run=client -o yaml > ind-pod.yaml
+spec:
+  tolerations:
+  - key: "dev"
+    operator: "Equal"
+    value: "prod"
+    effect: "NoSchedule"
+kubectl taint node node01 env=prod:NoSchedule-
+
+--Ex:-----------------------------------------------------------------------------------------------------------------------------
+controlplane $ kubectl run usa-pod --image nginx 
+pod/usa-pod created
+
+--Ex:-----------------------------------------------------------------------------------------------------------------------------
+controlplane $ kubectl get pods -o wide
+NAME      READY   STATUS    RESTARTS   AGE   IP            NODE     NOMINATED NODE   READINESS GATES
+usa-pod   1/1     Running   0          33s   192.168.1.5   node01   <none>           <none>
+
+--Ex:-----------------------------------------------------------------------------------------------------------------------------
+controlplane $ kubectl taint node node01 env=prod:NoSchedule
+node/node01 tainted
+
+--Ex:-----------------------------------------------------------------------------------------------------------------------------
+controlplane $ kubectl describe node node01 | grep -i taint
+Taints:             env=prod:NoSchedule
+
+--Ex:-----------------------------------------------------------------------------------------------------------------------------
+controlplane $ kubectl run ind-pod --image nginx 
+pod/ind-pod created
+
+--Ex:-----------------------------------------------------------------------------------------------------------------------------
+controlplane $ kubectl get pods -o wide
+NAME      READY   STATUS    RESTARTS   AGE    IP            NODE     NOMINATED NODE   READINESS GATES
+ind-pod   0/1     Pending   0          4s     <none>        <none>   <none>           <none>
+usa-pod   1/1     Running   0          80s    192.168.1.5   node01   <none>           <none>
+
+--Ex:-----------------------------------------------------------------------------------------------------------------------------
+controlplane $ kubectl describe pod ind-pod
+Events:
+  Type     Reason            Age   From               Message
+  ----     ------            ----  ----               -------
+  Warning  FailedScheduling  37s   default-scheduler  0/2 nodes are available: 1 node(s) had untolerated taint {env: prod},
+  1 node(s) had untolerated taint {node-role.kubernetes.io/control-plane: }. preemption: 0/2 nodes are available: 2 Preemption is
+  not helpful for scheduling.
+
+--Ex:-----------------------------------------------------------------------------------------------------------------------------
+controlplane $ kubectl run ind-pod --image nginx --dry-run=client -o yaml > ind-pod.yaml
+controlplane $ kubectl delete pod ind-pod
+pod "ind-pod" deleted
+
+--Ex:-----------------------------------------------------------------------------------------------------------------------------
+controlplane $ vi ind-pod.yaml
+```
+```yaml
+spec:
+  tolerations:
+  - key: "dev"
+    operator: "Equal"
+    value: "prod"
+    effect: "NoSchedule"
+```
+```sh
+--Ex:-----------------------------------------------------------------------------------------------------------------------------
+controlplane $ kubectl create -f ind-pod.yaml 
+pod/ind-pod created
+
+--Ex:-----------------------------------------------------------------------------------------------------------------------------
+controlplane $ kubectl get pods --namespace=default -o wide
+NAME      READY   STATUS    RESTARTS   AGE   IP            NODE     NOMINATED NODE   READINESS GATES
+ind-pod   1/1     Running   0          32m   192.168.1.6   node01   <none>           <none>
+usa-pod   1/1     Running   0          40m   192.168.1.5   node01   <none>           <none>
+
+--Ex:-----------------------------------------------------------------------------------------------------------------------------
+controlplane $ kubectl taint node node01 env=prod:NoSchedule-
+node/node01 untainted
+```
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIxMTIzMzk4NDksLTE4NzM4NzY4MDYsMz
-I0NjM0OTY2LC0zMzIzMDU1MTQsLTE1Mjk3MzQ5OTAsLTg3MzUy
-MTY3OCwtMzY3MTUwODgsMjA4MTg1OTE2MiwxODI4NjA3NjE5LC
-0xNTE4NDQxMjQyLC0xNjU4NjY5NDM1LC0xODI1NTA1MjY1LC0x
-NzAxNjQ4OTldfQ==
+eyJoaXN0b3J5IjpbLTQ5MTA2MTU0NCwtMjExMjMzOTg0OSwtMT
+g3Mzg3NjgwNiwzMjQ2MzQ5NjYsLTMzMjMwNTUxNCwtMTUyOTcz
+NDk5MCwtODczNTIxNjc4LC0zNjcxNTA4OCwyMDgxODU5MTYyLD
+E4Mjg2MDc2MTksLTE1MTg0NDEyNDIsLTE2NTg2Njk0MzUsLTE4
+MjU1MDUyNjUsLTE3MDE2NDg5OV19
 -->
