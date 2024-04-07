@@ -212,8 +212,10 @@ controlplane $ kubectl get services
 NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
 kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   33d
 
+--Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
 controlplane $ vi vignesh-service.yaml
-=======================================================
+```
+```yaml
 ---
 apiVersion: v1
 kind: Service
@@ -226,15 +228,17 @@ spec:
   selector:
     app: bank-db
     type: back-end
-=======================================================
+```
+```sh
 controlplane $ kubectl create -f vignesh-service.yaml --namespace=vignesh-ns
 service/vignesh-service created
-
+--Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
 controlplane $ kubectl get service
 NAME              TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
 kubernetes        ClusterIP   10.96.0.1       <none>        443/TCP   33d
 vignesh-service   ClusterIP   10.96.234.232   <none>        80/TCP    6s
 
+--Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
 controlplane $ kubectl get pods
 NAME            READY   STATUS    RESTARTS   AGE
 vignesh-pod-2   1/1     Running   0          38m
@@ -285,7 +289,7 @@ controlplane $ curl http://10.98.125.192:80
 
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExODIzMzM2MDAsMTgyODYwNzYxOSwtMT
+eyJoaXN0b3J5IjpbLTE2NzM4MjE5NTQsMTgyODYwNzYxOSwtMT
 UxODQ0MTI0MiwtMTY1ODY2OTQzNSwtMTgyNTUwNTI2NSwtMTcw
 MTY0ODk5XX0=
 -->
