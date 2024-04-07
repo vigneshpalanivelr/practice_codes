@@ -96,7 +96,7 @@ kubectl delete pods <pod>
 controlplane $ kubectl get pods 
 No resources found in default namespace.
 
---Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
+--Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------                    
 controlplane $ kubectl get pods -A
 NAMESPACE            NAME                                      READY   STATUS    RESTARTS       AGE
 kube-system          calico-kube-controllers-9d57d8f49-jvt8w   1/1     Running   3 (8m2s ago)   33d
@@ -295,7 +295,8 @@ vignesh-service   NodePort   10.98.125.192   <none>        80:32000/TCP   37s
 controlplane $ curl http://10.98.125.192:80
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg3MzUyMTY3OCwtMzY3MTUwODgsMjA4MT
-g1OTE2MiwxODI4NjA3NjE5LC0xNTE4NDQxMjQyLC0xNjU4NjY5
-NDM1LC0xODI1NTA1MjY1LC0xNzAxNjQ4OTldfQ==
+eyJoaXN0b3J5IjpbLTEwMzE2NDY3MzQsLTg3MzUyMTY3OCwtMz
+Y3MTUwODgsMjA4MTg1OTE2MiwxODI4NjA3NjE5LC0xNTE4NDQx
+MjQyLC0xNjU4NjY5NDM1LC0xODI1NTA1MjY1LC0xNzAxNjQ4OT
+ldfQ==
 -->
