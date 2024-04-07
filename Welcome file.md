@@ -351,6 +351,8 @@ ind-pod   0/1     Pending   0          4s     <none>        <none>   <none>     
 usa-pod   1/1     Running   0          80s    192.168.1.5   node01   <none>           <none>
 
 --Ex:-----------------------------------------------------------------------------------------------------------------------------
+```
+```yaml
 controlplane $ kubectl describe pod ind-pod
 Events:
   Type     Reason            Age   From               Message
@@ -358,7 +360,8 @@ Events:
   Warning  FailedScheduling  37s   default-scheduler  0/2 nodes are available: 1 node(s) had untolerated taint {env: prod},
   1 node(s) had untolerated taint {node-role.kubernetes.io/control-plane: }. preemption: 0/2 nodes are available: 2 Preemption is
   not helpful for scheduling.
-
+```
+```sh
 --Ex:-----------------------------------------------------------------------------------------------------------------------------
 controlplane $ kubectl run ind-pod --image nginx --dry-run=client -o yaml > ind-pod.yaml
 controlplane $ kubectl delete pod ind-pod
@@ -392,7 +395,7 @@ node/node01 untainted
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ5MTA2MTU0NCwtMjExMjMzOTg0OSwtMT
+eyJoaXN0b3J5IjpbLTI5MDc0NDk5NiwtMjExMjMzOTg0OSwtMT
 g3Mzg3NjgwNiwzMjQ2MzQ5NjYsLTMzMjMwNTUxNCwtMTUyOTcz
 NDk5MCwtODczNTIxNjc4LC0zNjcxNTA4OCwyMDgxODU5MTYyLD
 E4Mjg2MDc2MTksLTE1MTg0NDEyNDIsLTE2NTg2Njk0MzUsLTE4
