@@ -128,9 +128,6 @@ kube-system          kube-proxy-85drq                          1/1     Running  
 kube-system          kube-proxy-lhxdd                          1/1     Running   1 (8m13s ago)   33d   172.30.2.2    node01         <none>           <none>
 kube-system          kube-scheduler-controlplane               1/1     Running   2 (8m14s ago)   33d   172.30.1.2    controlplane   <none>           <none>
 local-path-storage   local-path-provisioner-5d854bc5c4-h55kw   1/1     Running   2 (8m14s ago)   33d   192.168.0.3   controlplane   <none>           <none>
-
---Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
-controlplane $ vi vignesh-pod.yaml
 ```
 ```yaml
 ---
@@ -150,6 +147,7 @@ spec:
 ```
 ```sh
 --Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
+controlplane $ vi vignesh-pod.yaml
 controlplane $ kubectl create -f vignesh-pod.yaml  
 pod/vignesh-pod-1 created
 
@@ -300,7 +298,7 @@ vignesh-service   NodePort   10.98.125.192   <none>        80:32000/TCP   37s
 controlplane $ curl http://10.98.125.192:80
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjA4MTg1OTE2MiwxODI4NjA3NjE5LC0xNT
-E4NDQxMjQyLC0xNjU4NjY5NDM1LC0xODI1NTA1MjY1LC0xNzAx
-NjQ4OTldfQ==
+eyJoaXN0b3J5IjpbLTM2NzE1MDg4LDIwODE4NTkxNjIsMTgyOD
+YwNzYxOSwtMTUxODQ0MTI0MiwtMTY1ODY2OTQzNSwtMTgyNTUw
+NTI2NSwtMTcwMTY0ODk5XX0=
 -->
