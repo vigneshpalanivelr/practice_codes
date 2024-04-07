@@ -159,7 +159,8 @@ NAMESPACE            NAME                                      READY   STATUS   
 default              vignesh-pod-1                             0/1     ContainerCreating   0             5s
 
 --Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
-controlplane $ vi vignesh-pod.yaml
+controlplane $ kubectl create -f vignesh-pod.yaml 
+pod/vignesh-pod-1 created
 ```
 ```yaml
 ---
@@ -197,6 +198,6 @@ vignesh-pod-2   1/1     Running   0          4m45s
 ## service
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTgzODE2NzY2NywtMTUxODQ0MTI0MiwtMT
+eyJoaXN0b3J5IjpbMTgyODYwNzYxOSwtMTUxODQ0MTI0MiwtMT
 Y1ODY2OTQzNSwtMTgyNTUwNTI2NSwtMTcwMTY0ODk5XX0=
 -->
