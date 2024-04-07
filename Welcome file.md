@@ -37,11 +37,15 @@ local-path-storage   Active   33d
 
 --Ex:-------------------------------------------------
 controlplane $ vi vignesh-namespace.yaml
+```
+```yaml
+---
 apiVersion: v1
 kind: Namespace
 metadata:
   name: vignesh-ns
-
+```
+```sh
 --Ex:------------------------------------------------
 controlplane $ kubectl create -f vignesh-namespace.yaml
 namespace/vignesh-ns created
@@ -127,6 +131,9 @@ local-path-storage   local-path-provisioner-5d854bc5c4-h55kw   1/1     Running  
 
 --Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
 controlplane $ vi vignesh-pod.yaml
+```
+```yaml
+---
 apiVersion: v1
 kind: Pod
 metadata:
@@ -140,7 +147,8 @@ spec:
     image: nginx:1.14.2
     ports:
     - containerPort: 80
-
+```
+```sh
 --Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
 controlplane $ kubectl create -f vignesh-pod.yaml  
 pod/vignesh-pod-1 created
@@ -152,6 +160,9 @@ default              vignesh-pod-1                             0/1     Container
 
 --Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
 controlplane $ vi vignesh-pod.yaml
+```
+```yaml
+---
 apiVersion: v1
 kind: Pod
 metadata:
@@ -325,6 +336,6 @@ B --> D{Rhombus}
 C --> D
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2NTg2Njk0MzUsLTE4MjU1MDUyNjUsLT
-E3MDE2NDg5OV19
+eyJoaXN0b3J5IjpbMTkxNDQxMDcyMywtMTY1ODY2OTQzNSwtMT
+gyNTUwNTI2NSwtMTcwMTY0ODk5XX0=
 -->
