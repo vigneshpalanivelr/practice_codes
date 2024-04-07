@@ -37,7 +37,6 @@ local-path-storage   Active   33d
 
 --Ex:-------------------------------------------------
 controlplane $ vi vignesh-namespace.yaml
----
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -89,6 +88,7 @@ kubectl create -f vignesh-pod.yaml --namespace=vignesh-ns
 kubectl describe pod <pod>
 kubectl delete pods <pod>
 
+
 --Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
 controlplane $ kubectl get pods 
 No resources found in default namespace.
@@ -127,7 +127,6 @@ local-path-storage   local-path-provisioner-5d854bc5c4-h55kw   1/1     Running  
 
 --Ex:---------------------------------------------------------------------------------------------------------------------------------------------------------------
 controlplane $ vi vignesh-pod.yaml
----
 apiVersion: v1
 kind: Pod
 metadata:
@@ -327,6 +326,6 @@ B --> D{Rhombus}
 C --> D
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTI2MTgxOTAsLTE4MjU1MDUyNjUsLTE3MD
-E2NDg5OV19
+eyJoaXN0b3J5IjpbLTc0MjczODU3OCwtMTgyNTUwNTI2NSwtMT
+cwMTY0ODk5XX0=
 -->
