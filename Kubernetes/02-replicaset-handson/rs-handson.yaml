@@ -1,0 +1,23 @@
+---
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: rs-handson
+  labels:
+    team: int
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      team: int
+  template:
+    metadata:
+      name: rs-handson-pod
+      labels:
+        team: int
+    spec:
+      containers:
+      - name: rs-handson-con
+        image: nginx:latest
+        ports:
+        - containerPort: 81
