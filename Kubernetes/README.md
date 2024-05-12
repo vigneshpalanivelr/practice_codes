@@ -24,6 +24,7 @@ rm -rf ~/.minikube/
 ### Ip and Service
 minikube ip -p vignesh-cluster
 minikube service vignesh-service -p vignesh-cluster
+minikube addons enable ingress
 ### Port Forwording
 kubectl port-forward <service> <source-port>:<target-port>
 
