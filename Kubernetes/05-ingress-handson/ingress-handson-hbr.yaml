@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-handson-hbr
+spec:
+  rules:
+    - host: ingress-nginx-hbr-1.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: service-handson
+                port:
+                  number: 8080
+    - host: ingress-nginx-hbr-2.com
+      http:
+        paths:
+          - path: /demo
+            pathType: Prefix
+            backend:
+              service:
+                name: sample-python-app-service
+                port:
+                  number: 8888
