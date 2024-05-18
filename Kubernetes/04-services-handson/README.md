@@ -1,37 +1,65 @@
+- [Service Hands-On](#service-hands-on)
+  * [List services](#list-services)
+  * [Create ClusterIP Service](#create-clusterip-service)
+  * [Access Nginx Application - Minikube](#access-nginx-application---minikube)
+  * [Access Nginx Application - Worker / Pod](#access-nginx-application---worker---pod)
+  * [Access Nginx Application - Worker / Pod (Multiple connections)](#access-nginx-application---worker---pod--multiple-connections-)
+  * [Access Nginx Application - PortForwording](#access-nginx-application---portforwording)
+  * [Create NodePort Service](#create-nodeport-service)
+  * [Python App Demo using ClusterIP](#python-app-demo-using-clusterip)
+  * [Python App Demo using NodePort](#python-app-demo-using-nodeport)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
+
 # Service Hands-On
 ```
 1) List services
-- kubectl get services
+kubectl get services
 
 2) Create ClusterIP Service
-- kubectl apply -f 04-services-handson/service-handson.yaml 
+kubectl apply -f 04-services-handson/service-handson.yaml 
+kubectl get svc
+kubectl get all -o wide
 
-3) List Services
-- kubectl get svc
-- kubectl get all -o wide
+4) Access Nginx Application - Minikube
+minikube ssh
+curl localhost:8080 * 2
+kubectl logs <all pods>
 
-====Cluster IP====
-4) Access Nginx Application - Inside Minikube
-- minikube ssh
-- curl localhost:8080 * 2
 
-5) Access Nginx Application - Worker / Pod
-- kubectl exec -it deployment-handson-7d6d5d5d88-6j7mr -- bash
-- curl 10.107.231.120:8080
-- Continuously hit NodePort IP from the cluster will distribute the load
-- i=1; while [ "$i" -le 20 ]; do curl service-handson:8080; i=$(( i + 1 )); done;
-- kubectl logs <all pods>
+5) Access Nginx Application Worker / Pod
+kubectl exec -it deployment-handson-7d6d5d5d88-6j7mr -- bash
+curl 10.107.231.120:8080
+i=1; while [ "$i" -le 20 ]; do curl service-handson:8080; i=$(( i + 1 )); done; Continuously hit NodePort IP from the cluster will distribute the load 
+kubectl logs <all pods>
 
 6) Access Nginx Application - PortForwording
-- kubectl port-forward service/service-handson 8082:8080
-- kubectl get all -o wide
-- Continuously hit port-forwording IP will always select only one pod
-- http://localhost:8082/
-- kubectl logs <all pods>
+kubectl port-forward service/service-handson 8082:8080
+kubectl get all -o wide
+http://localhost:8082/ # Continuously hit, port-forwording IP will always select only one pod
+kubectl logs <all pods>
 
 7) Create NodePort Service
+minikube ip
+curl 192.168.64.3:32000
+get all -o wide
+minikube ssh
+curl 10.107.231.120:8080 
+curl 10.244.0.18:80
+
 8) Python App Demo using ClusterIP
-8) Python App Demo using NodePort
+kubectl apply -f 04-services-handson/service-deployment-python-demo.yaml
+kubectl get all -o wide
+kubectl get pods -l app=sample-python-app -o wide
+minikube ssh
+curl -L 10.244.1.5:8000/demo
+
+
+9) Python App Demo using NodePort
+kubectl apply -f 04-services-handson/service-deployment-python-demo.yaml 
+kubectl get all -o wide
+curl -L 192.168.64.3:31000/demo
 ```
 
 
@@ -46,6 +74,7 @@ kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   6h19m
 
 ## Create ClusterIP Service
 - kubectl apply -f 04-services-handson/service-handson.yaml 
+- kubectl get svc
 ```
 dhivyamalathirajasekaran$ cat 04-services-handson/service-handson.yaml 
 apiVersion: v1
@@ -86,11 +115,7 @@ replicaset.apps/deployment-handson-5d5c489556   0         0         0       3h34
 replicaset.apps/deployment-handson-645fdb6957   0         0         0       3h45m
 replicaset.apps/deployment-handson-7d6d5d5d88   4         4         4       3h19m
 replicaset.apps/deployment-handson-85b5ccd5f5   0         0         0       6h16m
-```
 
-## List Services
-- kubectl get svc
-```
 dhivyamalathirajasekaran$ kubectl get svc
 NAME              TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
 kubernetes        ClusterIP   10.96.0.1        <none>        443/TCP    6h27m
@@ -100,6 +125,8 @@ service-handson   ClusterIP   10.107.231.120   <none>        8080/TCP   3m48s
 ## Access Nginx Application - Minikube
 - minikube ssh
 - curl localhost:8080
+- kubectl logs deployment-handson-7d6d5d5d88-n7bnv
+- kubectl logs deployment-handson-7d6d5d5d88-6j7mr
 ```
 dhivyamalathirajasekaran$ minikube ssh
                          _             _            
@@ -133,6 +160,8 @@ dhivyamalathirajasekaran$ kubectl logs deployment-handson-7d6d5d5d88-6j7mr
 ## Access Nginx Application - Worker / Pod
 - kubectl exec -it deployment-handson-7d6d5d5d88-6j7mr -- bash
 - curl 10.107.231.120:8080
+- kubectl logs deployment-handson-7d6d5d5d88-n7bnv
+- kubectl logs deployment-handson-7d6d5d5d88-6j7mr
 ```
 dhivyamalathirajasekaran$ kubectl exec -it deployment-handson-7d6d5d5d88-6j7mr -- bash
 root@deployment-handson-7d6d5d5d88-6j7mr:/# curl 10.107.231.120:8080
@@ -151,6 +180,10 @@ dhivyamalathirajasekaran$ kubectl logs deployment-handson-7d6d5d5d88-n7bnv
 ```
 
 ## Access Nginx Application - Worker / Pod (Multiple connections)
+- kubectl exec -it deployment-handson-7d6d5d5d88-6j7mr -- bash
+- i=1; while [ "$i" -le 20 ]; do curl service-handson:8080; i=$(( i + 1 )); done;
+- kubectl logs deployment-handson-7d6d5d5d88-n7bnv
+- kubectl logs deployment-handson-7d6d5d5d88-6j7mr
 ```
 dhivyamalathirajasekaran$ kubectl exec -it deployment-handson-7d6d5d5d88-6j7mr -- bash
 root@deployment-handson-7d6d5d5d88-6j7mr:/# i=1; while [ "$i" -le 20 ]; do curl service-handson:8080; i=$(( i + 1 )); done;
@@ -222,6 +255,12 @@ dhivyamalathirajasekaran$ kubectl logs deployment-handson-7d6d5d5d88-p6wtw
 ```
 
 ## Create NodePort Service
+- minikube ip
+- curl 192.168.64.3:32000
+- get all -o wide
+- minikube ssh
+- curl 10.107.231.120:8080 
+- curl 10.244.0.18:80
 ```
 dhivyamalathirajasekaran$ cat 04-services-handson/service-handson-np.yaml 
 apiVersion: v1
@@ -285,8 +324,9 @@ $ curl 10.244.0.18:80
 SUCCESS
 ```
 
-## Python App Demo
-### Deploy Python app
+## Python App Demo using ClusterIP
+- kubectl apply -f 04-services-handson/service-deployment-python-demo.yaml
+- kubectl get all -o wide
 ```
 dhivyamalathirajasekaran$ cat 04-services-handson/service-deployment-python-demo.yaml 
 apiVersion: apps/v1
@@ -366,10 +406,7 @@ replicaset.apps/deployment-handson-645fdb6957   0         0         0       26h 
 replicaset.apps/deployment-handson-7d6d5d5d88   4         4         4       25h    deployment-handson-con   nginx:1.18                             pod-template-hash=7d6d5d5d88,team=int
 replicaset.apps/deployment-handson-85b5ccd5f5   0         0         0       28h    deployment-handson-con   nginx:latest                           pod-template-hash=85b5ccd5f5,team=int
 replicaset.apps/sample-python-app-7ddbdd9945    2         2         2       119s   sample-python-app        abhishekf5/python-sample-app-demo:v1   app=sample-python-app,pod-template-hash=7ddbdd9945
-```
 
-### Access the appliation inside minikube
-```
 dhivyamalathirajasekaran$ kubectl get pods -l app=sample-python-app -o wide
 NAME                                 READY   STATUS    RESTARTS   AGE     IP           NODE                     NOMINATED NODE   READINESS GATES
 sample-python-app-7ddbdd9945-fmf4z   1/1     Running   0          9m33s   10.244.1.5   vignesh-vm-cluster-m03   <none>           <none>
@@ -386,7 +423,10 @@ $ curl -L 10.244.1.5:8000/demo
 SUCCESS
 ```
 
-### Update service as NodePort
+## Python App Demo using NodePort
+- kubectl apply -f 04-services-handson/service-deployment-python-demo.yaml 
+- kubectl get all -o wide
+- curl -L 192.168.64.3:31000/demo
 ```
 dhivyamalathirajasekaran$ cat 04-services-handson/service-deployment-python-demo.yaml 
 apiVersion: apps/v1

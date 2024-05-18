@@ -1,32 +1,46 @@
+- [Repliction Set - Hands-On](#repliction-set---hands-on)
+  * [Create Replication Set YAML with pod name rs-handson-pod](#create-replication-set-yaml-with-pod-name-rs-handson-pod)
+  * [Create a pod with name nginx-pod](#create-a-pod-with-name-nginx-pod)
+  * [Check total number of pods and pods are created via Replication set](#check-total-number-of-pods-and-pods-are-created-via-replication-set)
+  * [Show the repica set created](#show-the-repica-set-created)
+  * [Delete nginx-pod-2 created pod and check pods](#delete-nginx-pod-2-created-pod-and-check-pods)
+  * [Delete a pod created by Replication Set](#delete-a-pod-created-by-replication-set)
+  * [Delete a node and check the pods](#delete-a-node-and-check-the-pods)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
+
 # Repliction Set - Hands-On
 ```
 1) Create Replication Set YAML with pod name rs-handson-pod
-- kubectl apply -f replicaset-handson/rs-handson.yaml
+kubectl apply -f replicaset-handson/rs-handson.yaml
 
 2) Create a pod with name nginx-pod
-- kubectl apply -f  02-replicaset-handson/nginx-pod.yaml 
+kubectl apply -f  02-replicaset-handson/nginx-pod.yaml 
 
 3) Check total number of pods and pods are created via Replication set
-- kubectl get pods -owide
-- kubectl get pods -l team=int -owide
+kubectl get pods -owide
+kubectl get pods -l team=int -owide
 
 4) Show the repica set created
-- kubectl get rs
+kubectl get rs
 
 5) Delete nginx-pod-2 created pod and check pods
-- kubectl delete pod nginx-pod
-- kubectl get pods -owide
+kubectl delete pod nginx-pod
+kubectl get pods -owide
 
 6) Delete a pod created by Replication Set
-- kubectl delete pod rs-handson-pjltw
-- kubectl get pods
+kubectl delete pod rs-handson-pjltw
+kubectl get pods
 
 7) Delete a node and check the pods
-- kubectl get pods -o wide
-- kubectl get nodes
-- minikube node delete vignesh-vm-cluster-m02 -p vignesh-vm-cluster
-- kubectl get pods -o wide
+kubectl get pods -o wide
+kubectl get nodes
+minikube node delete vignesh-vm-cluster-m02 -p vignesh-vm-cluster
+kubectl get pods -o wide
 ```
+
+-----
 ## Create Replication Set YAML with pod name rs-handson-pod
 - kubectl apply -f replicaset-handson/rs-handson.yaml
 ```

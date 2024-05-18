@@ -1,51 +1,71 @@
+- [Deployment Hands-On](#deployment-hands-on)
+  * [Delete all the exsisting resources](#delete-all-the-exsisting-resources)
+  * [Checl all the resources and get App name for deployment](#checl-all-the-resources-and-get-app-name-for-deployment)
+  * [Create Deployment YAMl and Apply](#create-deployment-yaml-and-apply)
+  * [Update replicas in deployment YAML and apply](#update-replicas-in-deployment-yaml-and-apply)
+  * [Update replicas in CLI](#update-replicas-in-cli)
+  * [Apply deployment YAML again](#apply-deployment-yaml-again)
+  * [Check history of replica sets](#check-history-of-replica-sets)
+  * [Change the image version to 1.21.3](#change-the-image-version-to-1213)
+  * [Change the image version to 1.20 via CLI](#change-the-image-version-to-120-via-cli)
+  * [History of deployments](#history-of-deployments)
+  * [Change the image version to 1.20 via CLI with repord](#change-the-image-version-to-120-via-cli-with-repord)
+  * [Add Anotation in YAML and Apply](#add-anotation-in-yaml-and-apply)
+  * [Undo the rollout and check](#undo-the-rollout-and-check)
+  * [Rollout status](#rollout-status)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
+
 # Deployment Hands-On
 ```
 1) Delete all the exsisting resources
-- kubectl delete all --all
+kubectl delete all --all
 
 2) Checl all the resources and get App name for deployment
-- kubectl get all
-- kubectl api-resources | grep dep
+kubectl get all
+kubectl api-resources | grep dep
 
 3) Create Deployment YAMl and Apply
-- kubectl apply -f 03-deployment-handson/deployment-handson.yaml 
-- kubectl get all -owide
+kubectl apply -f 03-deployment-handson/deployment-handson.yaml 
+kubectl get all -owide
 
 4) Update replicas in deployment YAML and apply
-- kubectl get all -owide
+kubectl get all -owide
 
 5) Update replicas in CLI
-- kubectl scale --replicas=2 deployment/deployment-handson
-- kubectl get all -owide
+kubectl scale --replicas=2 deployment/deployment-handson
+kubectl get all -owide
 
 7) Apply deployment YAML again
 8) Check history of replica sets
-- kubectl get rs
+kubectl get rs
 
 9) Change the image version to 1.21.3
-- kubectl get rs
+kubectl get rs
 
 10) Change the image version to 1.20 via CLI
-- kubectl set image deployment/deployment-handson deployment-handson-con=nginx:1.20
+kubectl set image deployment/deployment-handson deployment-handson-con=nginx:1.20
 
 11) History of deployments
-- kubectl rollout history deployments
+kubectl rollout history deployments
 
 12) Change the image version to 1.20 via CLI with repord
-- kubectl set image deployment/vignesh-deployment vignesh-con=nginx:1.19 --record
-- kubectl rollout history deployments
+kubectl set image deployment/vignesh-deployment vignesh-con=nginx:1.19 --record
+kubectl rollout history deployments
 
 13) Add Anotation in YAML and Apply
-- kubectl apply -f 03-deployment-handson/deployment-handson.yaml
-- kubectl rollout history deployments
+kubectl apply -f 03-deployment-handson/deployment-handson.yaml
+kubectl rollout history deployments
 
 14) Undo the rollout and check
-- kubectl rollout undo deployment --to-revision=6
-- kubectl get all -o wide
+kubectl rollout undo deployment --to-revision=6
+kubectl get all -o wide
 
 15) Status of the rollout
-- kubectl rollout status deployment/deployment-handson
+kubectl rollout status deployment/deployment-handson
 ```
+-------
 
 ## Delete all the exsisting resources
 - kubectl delete all --all

@@ -1,3 +1,13 @@
+- [Ingress Controller Hands-On](#ingress-controller-hands-on)
+  * [Enable Ingress controller in Minikube](#enable-ingress-controller-in-minikube)
+  * [Create Path-Based-Routing Ingress resource in the cluster](#create-path-based-routing-ingress-resource-in-the-cluster)
+  * [Add to the hosts file for DNS Resolution](#add-to-the-hosts-file-for-dns-resolution)
+  * [Create Host-Based-Routing Ingress resource in the cluster](#create-host-based-routing-ingress-resource-in-the-cluster)
+  * [Enable TLS](#enable-tls)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
+
 # Ingress Controller Hands-On
 ```
 1) Makesure the pods are available
@@ -31,6 +41,7 @@ openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout tls.key -out tls.crt -
 kubectl create secret tls ingress-nginx-com-tls --cert tls.crt --key tls.key
 kubectl apply -f 05-ingress-handson/ingress-handson.yaml 
 ```
+---------
 
 ## Enable Ingress controller in Minikube
 - minikube addons enable ingress

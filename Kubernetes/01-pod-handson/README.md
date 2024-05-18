@@ -1,43 +1,58 @@
+- [Pods Commands - Hands-On](#pods-commands---hands-on)
+  * [Create Pods via CLI](#create-pods-via-cli)
+  * [Check the pods](#check-the-pods)
+  * [Create Pods via YAML with labels](#create-pods-via-yaml-with-labels)
+  * [Create one more pod](#create-one-more-pod)
+  * [Delete a pods and check if it is re-creating](#delete-a-pods-and-check-if-it-is-re-creating)
+  * [List pods using tags](#list-pods-using-tags)
+  * [Connect to container/minikube in the pod and hit nginx server](#connect-to-container-minikube-in-the-pod-and-hit-nginx-server)
+  * [Enable port-forwording and hit localhost:8080 in browser](#enable-port-forwording-and-hit-localhost-8080-in-browser)
+  * [Check the logs of a pod](#check-the-logs-of-a-pod)
+  * [Delete all the pods](#delete-all-the-pods)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
+
 # Pods Commands - Hands-On
 ```
 1) Create Pods via CLI
-- kubectl config get-contexts
-- kubectl get nodes
-- kubectl run nginx-pod --image=nginx
+kubectl config get-contexts
+kubectl get nodes
+kubectl run nginx-pod --image=nginx
 
 2) Check/List the pods
-- kubectl get pods -l team=int -o wide
-- watch "kubectl get pods -o wide"
+kubectl get pods -l team=int -o wide
+watch "kubectl get pods -o wide"
 
 3) Create Pods via YAML with labels
-- kubectl api-resources | grep -i pod
-- kubectl apply -f nginx-pod.yaml
-- watch "kubectl get pods -owide"
+kubectl api-resources | grep -i pod
+kubectl apply -f nginx-pod.yaml
+watch "kubectl get pods -owide"
 
 4) Create one more pod
 5) Delete a pods and check if it is re-creating
-- kubectl delete pod nginx-pod-1
+kubectl delete pod nginx-pod-1
 
 6) List pods using tags
-- kubectl get pods -l team=int
+kubectl get pods -l team=int
 
 7) Connect to container in the pod and hit nginx server
-- kubectl exec -it nginx-pod-2 -c nginx-con-2 -- bash
-- minikube ssh
-- minikube dashboard
+kubectl exec -it nginx-pod-2 -c nginx-con-2 -- bash
+minikube ssh
+minikube dashboard
 
 8) Enable port-forwording and hit localhost:8080 in browser
-- kubectl port-forward nginx-pod-2 8080:80
+kubectl port-forward nginx-pod-2 8080:80
 
 9) Check the logs of a pod
-- kubectl logs nginx-pod-2
+kubectl logs nginx-pod-2
 
 10) Delete all the pods
-- kubectl delete all --all
-
-
+kubectl delete all --all
 ```
 
+
+-------------
 ## Create Pods via CLI
 - kubectl config get-contexts
 - kubectl get nodes
