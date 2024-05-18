@@ -3,6 +3,10 @@ kind: Ingress
 metadata:
   name: ingress-handson
 spec:
+  tls:
+    - secretName: ingress-nginx-com
+      hosts:
+        - "ingress-nginx.com"
   rules:
   - host: ingress-nginx.com
     http:

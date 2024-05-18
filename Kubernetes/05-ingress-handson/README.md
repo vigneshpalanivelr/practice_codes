@@ -3,7 +3,6 @@
 1) Makesure the pods are available
 deployment.apps/deployment-handson
 deployment.apps/sample-python-app 
-
 service/sample-python-app-service
 service/service-handson 
 
@@ -11,7 +10,7 @@ service/service-handson
 minikube addons enable ingress
 kubectl get all -A | grep ingress-nginx
 
-3) Create Ingress resource in the cluster
+3) Create Path-Based-Routing Ingress resource in the cluster
 kubectl api-resources | grep ingress
 kubectl apply -f 05-ingress-handson/ingress-handson.yaml 
 kubectl get ing
@@ -20,6 +19,17 @@ kubectl get ing
 sudo vi /etc/hosts
 curl http://ingress-nginx.com/
 curl -L http://ingress-nginx.com/demo
+
+5) Create Host-Based-Routing Ingress resource in the cluster
+kubectl apply -f 05-ingress-handson/ingress-handson-hbr.yaml 
+sudo vi /etc/hosts
+curl -L http://ingress-nginx-hbr-1.com
+curl -L http://ingress-nginx-hbr-2.com/demo
+
+6) Enable TLS 
+openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout tls.key -out tls.crt -subj "/CN=ingress-nginx.com" -days 10000
+kubectl create secret tls ingress-nginx-com-tls --cert tls.crt --key tls.key
+kubectl apply -f 05-ingress-handson/ingress-handson.yaml 
 ```
 
 ## Enable Ingress controller in Minikube
@@ -114,7 +124,7 @@ ingress-nginx   job.batch/ingress-nginx-admission-create   1/1           17s    
 ingress-nginx   job.batch/ingress-nginx-admission-patch    1/1           19s        9m22s
 ```
 
-## Create Ingress resource in the cluster
+## Create Path-Based-Routing Ingress resource in the cluster
 - kubectl api-resources | grep ingress
 - kubectl apply -f 05-ingress-handson/ingress-handson.yaml 
 - kubectl get ing
@@ -171,3 +181,100 @@ dhivyamalathirajasekaran$ curl -L http://ingress-nginx.com/demo
 SUCCESS
 ```
 
+## Create Host-Based-Routing Ingress resource in the cluster
+- kubectl apply -f 05-ingress-handson/ingress-handson-hbr.yaml 
+- sudo vi /etc/hosts
+- curl -L http://ingress-nginx-hbr-1.com
+- curl -L http://ingress-nginx-hbr-2.com/demo
+```
+dhivyamalathirajasekaran$ cat 05-ingress-handson/ingress-handson-hbr.yaml 
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-handson-hbr
+spec:
+  rules:
+    - host: ingress-nginx-hbr-1.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: service-handson
+                port:
+                  number: 8080
+    - host: ingress-nginx-hbr-2.com
+      http:
+        paths:
+          - path: /demo
+            pathType: Prefix
+            backend:
+              service:
+                name: sample-python-app-service
+                port:
+                  number: 8888
+
+dhivyamalathirajasekaran$ kubectl apply -f 05-ingress-handson/ingress-handson-hbr.yaml 
+ingress.networking.k8s.io/ingress-handson-hbr created
+
+dhivyamalathirajasekaran$ cat /etc/hosts
+192.168.64.3    ingress-nginx.com ingress-nginx-hbr-1.com ingress-nginx-hbr-2.com
+
+dhivyamalathirajasekaran$ curl -L http://ingress-nginx-hbr-1.com
+SUCCESS
+
+dhivyamalathirajasekaran$ curl -L http://ingress-nginx-hbr-2.com/demo
+SUCCESS
+```
+
+## Enable TLS 
+- openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout tls.key -out tls.crt -subj "/CN=ingress-nginx.com" -days 10000
+- kubectl create secret tls ingress-nginx-com-tls --cert tls.crt --key tls.key
+- kubectl apply -f 05-ingress-handson/ingress-handson.yaml 
+```
+dhivyamalathirajasekaran$ cat 05-ingress-handson/ingress-handson.yaml 
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-handson
+spec:
+  tls:
+    - secretName: ingress-nginx-com
+      hosts:
+        - "ingress-nginx.com"
+  rules:
+  - host: ingress-nginx.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: service-handson
+            port:
+              number: 8080
+      - path: /demo
+        pathType: Prefix
+        backend:
+          service:
+            name: sample-python-app-service
+            port:
+              number: 8888
+
+dhivyamalathirajasekaran$ openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout tls.key -out tls.crt -subj "/CN=ingress-nginx.com" -days 10000
+Generating a RSA private key
+...++++
+.............++++
+writing new private key to 'tls.key'
+-----
+
+dhivyamalathirajasekaran$ kubectl create secret tls ingress-nginx-com-tls --cert tls.crt --key tls.key
+secret/ingress-nginx-com-tls created
+
+dhivyamalathirajasekaran$ kubectl apply -f 05-ingress-handson/ingress-handson.yaml 
+ingress.networking.k8s.io/ingress-handson configured
+
+hit https://ingress-nginx.com/
+and type thisisunsafe in browser webpage
+```
