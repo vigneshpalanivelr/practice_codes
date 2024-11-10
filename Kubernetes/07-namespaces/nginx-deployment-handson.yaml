@@ -1,0 +1,26 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  deployment-handson
+  namespace: nginx
+  labels:
+    team: int
+  annotations:
+    kubernetes.io/change-cause: "Updating Nginx Version to 1.21"
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      team: int
+  template:
+    metadata:
+      name: deployment-handson-pod
+      labels:
+        team: int
+    spec:
+      containers:
+      - name:  deployment-handson-con
+        image:  nginx:latest
+        ports:
+        - containerPort: 80
